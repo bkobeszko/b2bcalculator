@@ -9,12 +9,14 @@ You can check this code, which is running on https://kalkulatorb2b.beskode.pl
 
 ### Compilation
 This is a classic Maven app. This is based on Spring Boot, so popular IDEs will open, compile and run it seamlessly.
-However, the quicker way is Maven command:
+However, the quicker way is to run one of these Maven commands:
+
+Full build:
 ```sh
 mvn clean package
 ```
 
-Without frontend Semantic UI components:
+After one full build you can build without frontend Semantic UI components:
 ```sh
 mvn clean package -Dskip.npm -Dskip.gulp
 ```
@@ -29,6 +31,7 @@ Without frontend and unit tests:
 mvn clean package -Dskip.npm -Dskip.gulp -Dmaven.test.skip=true
 ```
 
+### Development
 Watch and build frontend file at runtime during frontend development and debugging:
 ```sh
 cd src\main\frontend
