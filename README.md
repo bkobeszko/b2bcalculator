@@ -47,3 +47,4 @@ http://localhost:5000
 
 
 Brought to you by [BESKODE](https://beskode.pl).
+Author does not take any responsibility for using calculation results in tax settlements.
