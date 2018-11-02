@@ -1,0 +1,24 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.disclaimer {
+   font-size: @fontSize * 0.7;
+}
+
+.auto_scrollbar {
+  overflow-x: auto;
+}
+
+.reveal_animation {
+    animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.not_valid {
+    color: @negativeTextColor;
+}

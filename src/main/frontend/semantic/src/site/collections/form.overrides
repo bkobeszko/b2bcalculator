@@ -1,0 +1,19 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.form .field.radio_field {
+  margin-top: 0.5em;
+}
+
+@media only screen and (max-width : (@largestMobileScreen)) {
+  .ui.form .fields {
+    .wide.field.first_element {
+      margin-top: 0;
+    }
+
+    .wide.field {
+      margin-top: @formFieldMarginTop;
+    }
+  }
+}

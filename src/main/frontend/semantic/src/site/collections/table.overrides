@@ -1,0 +1,43 @@
+.collapsing_table_container {
+  padding-left: @tableContainerSidePadding;
+  padding-right: @tableContainerSidePadding;
+}
+
+.collapsing.table {
+  margin: 0 auto;
+}
+
+.ui.definition.table tfoot:not(.full-width) th:first-child {
+  box-shadow: inherit;
+}
+
+.ui.celled.definition.table thead:not(.full-width) th:first-child {
+  box-shadow: inherit;
+}
+.ui.celled.definition.table tfoot:not(.full-width) th:first-child {
+  box-shadow: inherit;
+}
+
+.ui.celled.table tr th.full_border_left {
+  border-left: @border;
+}
+
+.ui.table td:not(:first-child),
+.ui.table th:not(:first-child) {
+  text-align: @dataCellAlign;
+}
+
+@media only screen and (max-width: (@cellSidePaddingMobileBreakpoint)) {
+    .collapsing_table_container {
+        .ui.table {
+            td, tfoot th {
+                padding-left: @cellSidePaddingMobile;
+                padding-right: @cellSidePaddingMobile;
+            }
+        }
+    }
+}
+
+.detailed_table_container {
+    margin-bottom: @tableDetailedMarginBottom;
+}

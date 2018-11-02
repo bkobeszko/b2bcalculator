@@ -1,0 +1,34 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+//@fontName: 'Chivo';
+
+//@fontName: 'Fira Sans';
+//@fontName: 'Libre Baskerville';
+//@fontName: 'PT Serif';
+//@fontName: 'Playfair Display';
+
+@logoFontPart1: 'Carrois Gothic SC';
+@logoFontPart2: 'Days One';
+@googleFontRequest : '@{logoFontPart1}|@{logoFontPart2}|@{googleFontName}:@{googleFontSizes}&subset=@{googleSubset}';
+
+@primaryColor: #365787;
+
+@pageBackground: #D9E3F2;
+@textColor: @primaryColor;
+
+@footerBackground: #54729E;
+
+@highlightBackground: @white;
+
+@inputHighlightBackground: @pageBackground;
+
+@inputPlaceholderColor: lighten(@inputColor, 50);
+@inputPlaceholderFocusColor: lighten(@inputColor, 35);
+
+@formFieldMarginTop: 1em;
+
+@invertedTextColor: @pageBackground;
+
+@accordionTitleFontSize: @fontSize * 1.1;

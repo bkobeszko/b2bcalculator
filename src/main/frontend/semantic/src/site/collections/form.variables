@@ -1,0 +1,9 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@loaderDimmerColor: fade(@pageBackground, 70%);
+@loaderSize: 5em;
+
+@loaderLineColor: @footerBackground;
+@loaderFillColor: fade(@loaderLineColor, 10%);

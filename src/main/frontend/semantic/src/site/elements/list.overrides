@@ -1,0 +1,7 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+.footer .inverted.link.list a.item {
+  color: darken(@invertedTextColor, 10%);
+}

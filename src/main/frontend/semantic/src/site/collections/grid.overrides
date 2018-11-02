@@ -1,0 +1,11 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.grid.main_form {
+  margin-bottom: @mainFormMarginBottom;
+}
+
+.grid>.row.compact {
+  padding: 0;
+}

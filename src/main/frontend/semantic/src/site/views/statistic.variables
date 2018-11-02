@@ -1,0 +1,4 @@
+@marginLeftBreakpoint: 580px;
+@marginLeftAfterBreakpoint: 5em;
+@valueColor: @textColor;
+@labelColor: lighten(@valueColor, 25%);

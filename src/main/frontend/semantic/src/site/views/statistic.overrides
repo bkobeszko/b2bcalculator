@@ -1,0 +1,8 @@
+@media only screen and (max-width: (@marginLeftBreakpoint)) {
+  .ui.statistics {
+    margin-left: @marginLeftAfterBreakpoint;
+  }
+}
+
+
+

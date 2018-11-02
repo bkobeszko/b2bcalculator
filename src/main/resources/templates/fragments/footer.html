@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="footer">
+    <div class="ui inverted vertical segment footer footer_top_margin_large" id="footer">
+        <div class="ui container">
+            <div class="ui inverted divided equal height stackable grid">
+                <div class="four wide column">
+                    <div class="ui inverted link list">
+                        <!--/*<a href="?lang=en" th:href="@{/(lang=#{language.code})}" class="item" th:inline="text">-->
+                            <!--<i class="flag" th:classappend="#{language.flag}"></i>-->
+                            <!--[[#{language.text}]]-->
+                        <!--</a>*/-->
+                        <!--/*<a href="https://www.facebook.com/Kalkulator-B2B-2034551580092219" class="item" th:inline="text">
+                            <i class="facebook outline icon icon_align"></i>
+                            Facebook
+                        </a>*/-->
+                        <a href="mailto:b.kobeszko@beskode.pl" class="item" th:inline="text">
+                            <i class="mail outline icon icon_align"></i>
+                            [[#{contact}]]
+                        </a>
+                        <a href="https://github.com/bkobeszko/b2bcalculator" class="item" th:inline="text">
+                        <i class="github icon icon_align"></i>
+                        [[#{githubCode}]]
+                        </a>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <p>
+                        <a href="https://beskode.pl">BESKODE</a>
+                    </p>
+                    <p class="disclaimer" th:text="#{disclaimer}">Autor nie bierze odpowiedzialności za użycie wyników w rozliczeniach podatkowych.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

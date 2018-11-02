@@ -1,0 +1,25 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+h1.ui.header {
+  margin-bottom: 0;
+  font-size: @fontSize * 3;
+}
+
+.ui.header:first-child {
+  margin-top: 1.5em;
+}
+
+h2 {
+  font-size: @fontSize * 1.5;
+  font-weight: normal;
+}
+
+.logo_part_1 {
+    font-family: @logoFontPart1, @headerFont;
+}
+
+.logo_part_2 {
+    font-family: @logoFontPart2, @headerFont;
+}

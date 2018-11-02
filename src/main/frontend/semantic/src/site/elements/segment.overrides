@@ -1,0 +1,33 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.segment.centered_title {
+  font-size: @accordionTitleFontSize;
+}
+
+.segment.centered_in_form,
+.segment.centered_title {
+  padding: 0;
+}
+
+.ui.vertical.segment.footer {
+  padding: @footerPadding;
+  margin-top: @footerMarginTop;
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+    .ui.vertical.segment.footer.footer_top_margin_large {
+       margin-top: @footerMarginTopLarge;
+    }
+}
+
+.footer {
+    a {
+        color: @footerLinkColor;
+    }
+
+    a:hover {
+        color: @footerLinkHoverColor;
+    }
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/headerPart :: headerPart"></th:block>
+    <title th:text="#{title}">Kalkulator B2B</title>
+    <meta name="description" th:attr="content=#{metaDescription}" content="Sprawdź swój zysk! Poznaj miesięczny i roczny zysk z faktur B2B. Do wyboru podatki, ZUS i koszty. Oblicz, ile będziesz zarabiał po założeniu działalności!">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="semantic/semantic.min.js"></script>
+    <style type="text/css">
+    <!--/* a place for a temporary styles */-->
+
+    </style>
+
+    <th:block th:include="fragments/analyticsScript :: analyticsScript"></th:block>
+</head>
+<body>
+
+<div class="ui one column stackable grid">
+    <div class="seven wide centered column">
+        <div class="ui inline cookie nag">
+            <span class="title" th:text="#{cookieNag}">Używamy tzw. ciasteczek, aby indywidualnie dostosować stronę do Twoich potrzeb.</span>
+            <i class="close icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui vertical center aligned basic segment">
+    <h1 class="ui header">
+        <span class="logo_part_1" th:text="#{logoPartOne}">Kalkulator</span>
+        <span class="logo_part_2" th:text="#{logoPartTwo}">B2B</span>
+    </h1>
+    <h2 th:text="#{shortDescription}">Oblicz, ile będziesz zarabiał po założeniu działalności!</h2>
+</div>
+
+<div class="ui one column stackable grid main_form">
+    <div class="seven wide centered column">
+        <form class="ui large form">
+            <div class="field">
+                <div class="ui right labeled big input">
+                    <input class="monthly_net_income" name="monthly_net_income" id="monthlyNetIncome" placeholder="Przychód netto/miesiąc"
+                           th:placeholder="#{form.monthlyNetIncome.placeholder}" type="number" step="500" min="0" value=""/>
+                    <div class="ui basic label" th:text="#{currencyCode}">zł</div>
+                </div>
+            </div>
+            <div class="ui accordion field" id="additionalOptionsAccordion">
+                <div class="title ui center aligned basic segment centered_title" th:inline="text">
+                    <i class="icon dropdown"></i>
+                    [[#{form.additionalParametersInfo}]]
+                </div>
+
+                <div class="content">
+                    <div class="fields">
+                        <div class="three wide field"></div>
+                        <div id="zusTaxType" class="grouped six wide field first_element">
+                            <label for="zus_tax_type" th:text="#{form.zusTax.label}">ZUS:</label>
+                            <div class="field radio_field">
+                                <div class="ui radio checkbox checked">
+                                    <input name="zus_tax_type" checked="" class="hidden" type="radio" />
+                                    <label val="Normal" th:text="#{form.zusTax.type.normal}">normalny</label>
+                                </div>
+                            </div>
+                            <div class="field radio_field">
+                                <div class="ui radio checkbox">
+                                    <input name="zus_tax_type" class="hidden" type="radio" />
+                                    <label val="Preferential" th:text="#{form.zusTax.type.preferential}">preferencyjny</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="taxType" class="grouped six wide field">
+                            <label for="tax_type" th:text="#{form.tax.label}">Podatek:</label>
+                            <div class="field radio_field">
+                                <div class="ui radio checkbox checked">
+                                    <input name="tax_type" checked="" class="hidden" type="radio" />
+                                    <label val="Linear" th:text="#{form.tax.type.linear}">liniowy</label>
+                                </div>
+                            </div>
+                            <div class="field radio_field">
+                                <div class="ui radio checkbox ">
+                                    <input name="tax_type" class="hidden" type="radio" />
+                                    <label val="Scale" th:text="#{form.tax.type.scale}">skala podatkowa</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fields">
+                        <div class="eleven wide field">
+                            <label th:text="#{form.monthlyCosts}">Koszty miesięczne</label>
+                            <div class="ui right labeled input">
+                                <input id="monthlyNetCosts" placeholder="Koszty miesięczne (netto)" type="number" step="50"
+                                       min="0" th:placeholder="#{form.monthlyCosts.placeholder}" name="monthly_net_costs"/>
+                                <div class="ui basic label" th:text="#{currencyCode}">zł</div>
+                            </div>
+                        </div>
+                        <div class="five wide field">
+                            <label th:text="#{form.year}">Rok</label>
+                            <select id="year" class="ui compact dropdown">
+                                <option  th:each="year: ${years}" th:value="${year}" th:text="${year}">2017</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="fields">
+                        <div class="three wide field"></div>
+                        <div class="seven wide field">
+                            <div class="ui checkbox">
+                                <input id="payZUSHealthInsurance" class="hidden" type="checkbox" checked="checked" />
+                                <label th:text="#{form.payZUSHealthInsurance}">chcę płacić ubezpieczenie zdrowotne</label>
+                            </div>
+                        </div>
+                        <div class="five wide field">
+                            <div class="ui checkbox">
+                                <input id="payVAT" class="hidden" type="checkbox" checked="checked" />
+                                <label th:text="#{form.payVAT}">będę płacił VAT</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui warning message">
+                <div class="header" th:text="#{form.warningMessage.header}">Jest problem</div>
+                <p th:text="#{form.warningMessage.text}">Nie udało się obliczyć kwot, spróbuj jeszcze raz.</p>
+            </div>
+
+            <div class="ui center aligned basic segment centered_in_form">
+                <div class="ui huge primary button" th:text="#{form.calculate}">Oblicz</div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div id="calculationResults"></div>
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+
+<script id="calculation-result-template" type="text/x-handlebars-template">
+    <div class="reveal_animation">
+    <div class="ui stackable centered grid">
+        <div class="row compact">
+            <div class="ui small statistic">
+                <div class="value">
+                    {{calculationStatistics.averageMonthlyProfit}}
+                </div>
+                <div class="label" th:inline="text">
+                    {{#ifGreaterThan calculationStatistics.uniqueMonthlyProfits.length 1}}
+                    [[#{result.summary.monthlyAverageProfit}]]
+                    {{else}}
+                    [[#{result.summary.monthlyProfit}]]
+                    {{/ifGreaterThan}}
+                </div>
+            </div>
+        </div>
+        {{#ifGreaterThan calculationStatistics.uniqueMonthlyProfits.length 1}}
+        <div class="row compact">
+            <div class="ui accordion" id="uniqueProfitsAccordion">
+                <div class="title" th:inline="text">
+                    <i class="dropdown icon"></i>
+                    [[#{result.more}]]
+                </div>
+                <div class="content">
+                    <div class="ui tiny statistics">
+                        {{#each calculationStatistics.uniqueMonthlyProfits}}
+                        <div class="statistic">
+                            <div class="value">
+                                {{profit}}
+                            </div>
+                            <div class="label">
+                                {{#ifEquals startMonth endMonth}}
+                                    {{#getMonth startMonth}}{{/getMonth}}
+                                {{else}}
+                                    {{#getMonth startMonth}}{{/getMonth}} - {{#getMonth endMonth}}{{/getMonth}}
+                                {{/ifEquals}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/ifGreaterThan}}
+    </div>
+
+    <h4 class="ui horizontal divider header" th:inline="text">
+        <i class="calendar alternate outline icon"></i>
+        [[#{result.yearDetails}]]
+    </h4>
+
+    <div class="table_container collapsing_table_container" id="tableResults">
+        <table class="ui four column definition collapsing unstackable celled table">
+            <thead class="full-width">
+            <tr>
+                <th></th>
+                <th th:text="#{result.tax}">Podatek</th>
+                <th th:text="#{result.zus}">ZUS</th>
+                <th th:text="#{result.profit}">Kwota "na rękę"</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each monthlySummaries}}
+            <tr class="{{#if summary.scaleTaxThresholdReached}}warning{{/if}}">
+                <td>{{#getMonth month}}{{/getMonth}}</td>
+                <td>{{summary.advancePaymentPIT}}</td>
+                <td>{{summary.zus.total}}</td>
+                <td>{{summary.profit}}</td>
+            </tr>
+            {{#if @last}}
+            <tfoot>
+            <tr>
+                <th th:text="#{result.total}">Suma</th>
+                <th>{{summaryCumulative.advancePaymentPIT}}</th>
+                <th>{{summaryCumulative.zus.total}}</th>
+                <th>{{summaryCumulative.profit}}</th>
+            </tr>
+            </tfoot>
+            {{/if}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ui accordion" id="detailsAccordion">
+        <div class="centered title " th:inline="text">
+            <i class="dropdown icon"></i>
+            [[#{result.moreDetails}]]
+        </div>
+        <div class="content">
+            <h4 class="ui horizontal divider header" th:inline="text">
+                <i class="lab icon"></i>
+                [[#{result.components}]]
+            </h4>
+
+            <div th:replace="fragments/resultFullTable :: resultFullTable (type='SUMMARY')"></div>
+
+            <h4 class="ui horizontal divider header" th:inline="text">
+                <i class="line chart icon"></i>
+                [[#{result.raisingDetails}]]
+            </h4>
+
+            <div th:replace="fragments/resultFullTable :: resultFullTable (type='SUMMARY_CUMULATIVE')"></div>
+
+        </div>
+    </div>
+    </div>
+</script>
+
+<script th:inline="javascript">
+    Messages = {
+        validation: {
+            validIncome: [[#{messages.validation.validIncome}]],
+            validCosts: [[#{messages.validation.validCosts}]]
+        }
+    };
+
+    Months = [
+        [[#{months.january}]],
+        [[#{months.february}]],
+        [[#{months.march}]],
+        [[#{months.april}]],
+        [[#{months.may}]],
+        [[#{months.june}]],
+        [[#{months.july}]],
+        [[#{months.august}]],
+        [[#{months.september}]],
+        [[#{months.october}]],
+        [[#{months.november}]],
+        [[#{months.december}]]
+    ];
+</script>
+
+<th:block th:include="fragments/scripts/scripts :: scripts" ></th:block>
+
+</body>
+</html>

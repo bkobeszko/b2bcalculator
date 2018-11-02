@@ -1,0 +1,46 @@
+{
+  "base": "semantic/",
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src/site/",
+      "themes": "src/themes/"
+    },
+    "output": {
+      "packaged": "../../resources/static/semantic/",
+      "uncompressed": "dist/components/",
+      "compressed": "dist/components/",
+      "themes": "../../resources/static/semantic/themes/"
+    },
+    "clean": "dist/"
+  },
+  "permission": false,
+  "autoInstall": true,
+  "rtl": false,
+  "components": [
+    "reset",
+    "site",
+    "button",
+    "container",
+    "divider",
+    "flag",
+    "header",
+    "icon",
+    "input",
+    "label",
+    "list",
+    "segment",
+    "form",
+    "grid",
+    "message",
+    "table",
+    "item",
+    "statistic",
+    "accordion",
+    "checkbox",
+    "dropdown",
+    "nag",
+    "transition"
+  ]
+}

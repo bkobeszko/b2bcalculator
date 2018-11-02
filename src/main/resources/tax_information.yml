@@ -1,0 +1,171 @@
+# Source:
+# VAT: http://wyborcza.pl/1,155290,14238581,20_lat_z_VAT.html
+# Tax: http://biznes.onet.pl/wiadomosci/kraj/historia-podatku-pit-w-polsce-jak-sie-zmienialy-ulgi-i-stawki/65j98p
+# Thresholds: http://www.pit.pl/archiwum_skali_podatkowej_pit_191.php
+# ZUS: http://zus.pox.pl/zus_skladki_historyczne.htm, http://zus.pox.pl/skladki-preferencyjne-zus-archiwum-skladek-od-2005-roku.htm
+
+VATRate:
+  2011: 0.23
+  1993: 0.22
+# no VAT before
+
+linearIncomeTaxRate:
+  2004: 0.19
+# no linear tax before
+
+scaleIncomeTaxRate1:
+  2009: 0.18
+  1998: 0.19
+  1997: 0.20
+  1994: 0.21
+  1992: 0.20
+
+scaleIncomeTaxRate2:
+  2009: 0.32
+  1998: 0.30
+  1997: 0.32
+# before there was third threshold
+  1994: 0.33
+  1992: 0.30
+
+#scaleIncomeTaxRate3:
+## no rate 3 after this year
+#  1998: 0.40
+#  1997: 0.44
+#  1994: 0.45
+#  1992: 0.40
+
+scaleIncomeTaxThreshold:
+  2007: 85528
+  2001: 74048
+  2000: 65472
+  1999: 59248
+  1997: 50554
+  1996: 32760
+  1995: 24800
+  1994: 18160
+  1992: 12960
+
+# some values are the average from months
+ZUSSocialInsurance:
+  2018: 843.45
+  2017: 812.61
+  2016: 772.96
+  2015: 756.22
+  2014: 716.99
+  2013: 710.67
+  2012: 596.09
+  2011: 597.37
+  2010: 559.49
+  2009: 552.28
+  2008: 523.17
+  2007: 560.22
+  2006: 545.80
+  2005: 513.53
+  2004: 495.55
+  2003: 482.51
+  2002: 464.40
+  2001: 447.63
+  2000: 416.86
+  1999: 356.54
+# no data before
+
+# some values are the average from months
+ZUSSocialInsurancePreferential:
+  2018: 199.34
+  2017: 190.62
+  2016: 176.33
+  2015: 167.13
+  2014: 160.78
+  2013: 153.12
+  2012: 139.78
+  2011: 123.24
+  2010: 117.11
+  2009: 113.79
+  2008: 100.57
+  2007: 99.03
+  2006: 99.60
+  2005: 69.74
+# no preferential before
+
+# some values are the average from months
+ZUSHealthInsuranceContributionBasis:
+# 75% przeciętnego miesięcznego wynagrodzenia
+  2018: 3554.93
+  2017: 3303.13
+  2016: 3210.60
+  2015: 3104.57
+  2014: 3004.48
+  2013: 2908.13
+  2012: 2828.31
+  2011: 2704.31
+  2010: 2592.46
+  2009: 2383.54
+  2008: 2284.97
+  2007: 2078.66
+  2006: 1948.27
+  2005: 1855.30
+  2004: 1804.34
+  2003: 1589.27
+  2002: 1261.63
+  2001: 1206.63
+  2000: 1105.74
+  1999: 907.89
+# no data before
+
+ZUSHealthInsuranceContributionBasisRate:
+  2007: 0.09
+  2006: 0.0875
+  2005: 0.85
+  2004: 0.825
+  2003: 0.08
+  2001: 0.0775
+  1999: 0.075
+# no data before
+
+ZUSHealthInsuranceContributionToDeductRate:
+  2001: 0.0775
+  1999: 0.075
+# no data before
+
+# some values are the average from months
+ZUSWorkFund:
+  2018: 65.31
+  2017: 62.67
+  2016: 59.61
+  2015: 58.20
+  2014: 55.07
+  2013: 54.58
+  2012: 51.83
+  2011: 49.38
+  2010: 46.25
+  2009: 46.94
+  2008: 42.65
+  2007: 38.76
+  2006: 36.15
+  2005: 34.56
+  2004: 33.07
+  2003: 31.84
+  2002: 30.91
+  2001: 29.56
+  2000: 27.09
+  1999: 22.24
+# no data before
+
+# some values are the average from months
+ZUSWorkFundPreferential:
+  2018: 0
+  2017: 14.70
+  2016: 13.60
+  2015: 12.86
+  2014: 12.35
+  2013: 11.76
+  2012: 11.03
+  2011: 10.19
+  2010: 9.68
+  2009: 9.38
+  2008: 8.28
+  2007: 6.88
+  2006: 6.61
+  2005: 4.63
+# no preferential before

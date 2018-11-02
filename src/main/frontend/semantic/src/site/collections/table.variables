@@ -1,0 +1,24 @@
+@tableContainerSidePadding: 1em;
+@definitionColumnColor: @textColor;
+
+@borderColor: darken(@pageBackground, 5%);
+@tableDescriptionCellBackground: fade(@borderColor, 20%);
+
+@headerBackground: @tableDescriptionCellBackground;
+@footerBackground: @tableDescriptionCellBackground;
+@definitionColumnBackground: @tableDescriptionCellBackground;
+@definitionHeaderBackground: @tableDescriptionCellBackground;
+@definitionFooterBackground: @tableDescriptionCellBackground;
+
+@border: 1px solid @borderColor;
+@footerBorder: @border;
+@headerBorder: @border;
+@cellBorder: @border;
+@rowBorder: @border;
+
+@dataCellAlign: center;
+
+@cellSidePaddingMobileBreakpoint: 410px;
+@cellSidePaddingMobile: .55em;
+
+@tableDetailedMarginBottom: 1.5em;

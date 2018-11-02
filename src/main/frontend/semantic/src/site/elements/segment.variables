@@ -1,0 +1,10 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@invertedBackground: @footerBackground;
+@footerPadding: 3em 0em;
+@footerMarginTop: 1em;
+@footerMarginTopLarge: 16em;
+@footerLinkColor: @invertedTextColor;
+@footerLinkHoverColor: white;

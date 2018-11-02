@@ -1,0 +1,7 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.form input[type=number].monthly_net_income {
+    font-size: @monthlyNetIncomeFontSize;
+}

@@ -1,0 +1,7 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.list>.item>i.icon.icon_align {
+    margin-right: @iconAlignMargin;
+}
