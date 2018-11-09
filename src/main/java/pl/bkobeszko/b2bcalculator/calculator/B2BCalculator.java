@@ -30,67 +30,67 @@ import java.util.stream.Collectors;
 @Slf4j
 public abstract class B2BCalculator {
     private static final int MONTHS_IN_YEAR = 12; // this is not supposed to change :)
-
+    
     protected abstract CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxInformation taxInformation, CalculationSummary summaryCumulative);
-
+    
     public YearlyCalculationSummary calculateYearlySummary(CalculatorInputData inputData, TaxInformation taxInformation) {
         log.info("calculating yearly summary for {}", inputData);
-
+        
         List<MonthlyCalculationSummary> summariesMonth = calculateMonthSummaries(inputData, taxInformation);
         CalculationStatistics statistics = calculateStatistics(summariesMonth);
-
+        
         return new YearlyCalculationSummary(summariesMonth, statistics);
     }
-
+    
     private CalculationStatistics calculateStatistics(List<MonthlyCalculationSummary> summariesMonth) {
         ImmutableListMultimap<CalculationSummary, MonthlyCalculationSummary> monthsWithSummary = Multimaps.index(summariesMonth, MonthlyCalculationSummary::getSummary);
-
+        
         List<PeriodProfit> uniqueMonthlyProfits = new ArrayList<>();
         for (CalculationSummary calculationSummary : monthsWithSummary.keySet()) {
             ImmutableList<MonthlyCalculationSummary> summaries = monthsWithSummary.get(calculationSummary);
-
+            
             List<Integer> months = summaries.stream()
                     .map(MonthlyCalculationSummary::getMonth)
                     .collect(Collectors.toList());
-
+            
             Integer firstMonth = months.get(0);
             Integer lastMonth = months.get(months.size() - 1);
-
+            
             uniqueMonthlyProfits.add(new PeriodProfit(calculationSummary.getProfit(), firstMonth, lastMonth));
         }
-
+        
         // yearly profit is the last cumulated profit
         Money totalYearlyProfit = summariesMonth.get(summariesMonth.size() - 1).getSummaryCumulative().getProfit();
         Money averageMonthlyProfit = CalculatorUtils.divide(totalYearlyProfit, summariesMonth.size());
-
+        
         return CalculationStatistics.builder()
                 .averageMonthlyProfit(averageMonthlyProfit)
                 .uniqueMonthlyProfits(uniqueMonthlyProfits)
                 .build();
     }
-
+    
     private List<MonthlyCalculationSummary> calculateMonthSummaries(CalculatorInputData inputData, TaxInformation taxInformation) {
         ZUSTax zus = inputData.getZusTaxType() == ZUSTaxType.NORMAL ? ZUSTaxFactory.getNormalZUS(taxInformation, inputData.isPayZUSHealthInsurance()) : ZUSTaxFactory.getPreferentialZUS(taxInformation, inputData.isPayZUSHealthInsurance());
         CalculationSummary summaryCumulativeTotal = CalculationSummary.builder().build();
         List<MonthlyCalculationSummary> summariesMonth = new ArrayList<>();
-
+        
         for (int i = 0; i < MONTHS_IN_YEAR; i++) {
             CalculationSummary summary = calculateSummaryOneMonth(inputData, taxInformation, zus, summaryCumulativeTotal);
-
+            
             MonthlyCalculationSummary month = new MonthlyCalculationSummary(i + 1);
             month.setSummary(summary);
-
+            
             CalculationSummary cumulativeToCurrentMonth = month.getSummary().add(summaryCumulativeTotal);
             month.setSummaryCumulative(cumulativeToCurrentMonth);
-
+            
             summaryCumulativeTotal = month.getSummaryCumulative();
-
+            
             summariesMonth.add(month);
         }
-
+        
         return summariesMonth;
     }
-
+    
     private CalculationSummary calculateSummaryOneMonth(CalculatorInputData inputData, TaxInformation taxInformation, ZUSTax zus, CalculationSummary summaryCumulativeTotal) {
         // helper variables to get code more readable
         Money monthlyNetIncome = CalculatorUtils.getMoneyOf(inputData.getMonthlyNetIncome());
@@ -98,13 +98,13 @@ public abstract class B2BCalculator {
         Money contributionToDeductFromIncome = zus.getContributionToDeductFromIncome();
         Money healthInsuranceContributionToDeduct = zus.getHealthInsuranceContributionToDeduct();
         Money zusTotal = zus.getTotal();
-
+        
         CalculationSummary summaryOneMonth = CalculationSummary.builder()
                 .zus(zus)
                 .netInvoiceSum(monthlyNetIncome)
                 .revenueCost(monthlyCosts).incomeToTax(monthlyNetIncome.minus(monthlyCosts).minus(contributionToDeductFromIncome))
                 .build();
-
+        
         /* Very important! Tax calculation must be directly after set the:
          * - zus
          * - netInvoiceSum
@@ -112,22 +112,22 @@ public abstract class B2BCalculator {
          * - incomeToTax
          */
         summaryOneMonth = calculateTax(summaryOneMonth, inputData.getTaxType(), taxInformation, summaryCumulativeTotal);
-
+        
         summaryOneMonth.setTax(summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct));
         summaryOneMonth.setAdvancePaymentPIT(calculateAdvancePaymentPIT(summaryOneMonth.getTax()));
-
+        
         Money vat = CalculatorUtils.getZeroMoney();
         if (inputData.isPayVAT()) {
             vat = CalculatorUtils.multiply(monthlyNetIncome, taxInformation.getVatRate());
         }
-
+        
         summaryOneMonth.setVat(vat);
         summaryOneMonth.setTotalInvoiceSum(monthlyNetIncome.plus(summaryOneMonth.getVat()));
         summaryOneMonth.setProfit(monthlyNetIncome.minus(monthlyCosts).minus(zusTotal).minus(summaryOneMonth.getAdvancePaymentPIT()));
-
+        
         return summaryOneMonth;
     }
-
+    
     /**
      * Every month we don't pay the whole tax, we pay only the advance,
      * which is the tax rounded to integer as follows:
@@ -142,13 +142,13 @@ public abstract class B2BCalculator {
     private Money calculateAdvancePaymentPIT(Money tax) {
         Money advancePIT = tax;
         Money decimalPart = tax.minus(tax.getAmountMajor());
-
+        
         if (decimalPart.isGreaterThan(CalculatorUtils.getHalfMoney())) {
             advancePIT = advancePIT.rounded(0, RoundingMode.CEILING);
         } else {
             advancePIT = advancePIT.rounded(0, RoundingMode.FLOOR);
         }
-
+        
         return advancePIT;
     }
 }

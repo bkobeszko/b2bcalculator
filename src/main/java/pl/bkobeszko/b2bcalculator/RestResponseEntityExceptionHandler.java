@@ -18,12 +18,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice(annotations = RestController.class)
 @Slf4j
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-
+    
     @ExceptionHandler(value = { Throwable.class })
     protected ResponseEntity<Object> handleError(RuntimeException ex, WebRequest request) {
         HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         log.error("REST error handled as {}. WebRequest: {} RuntimeException: ", httpStatus, request, ex);
-
+        
         return handleExceptionInternal(ex, httpStatus, new HttpHeaders(), httpStatus, request);
     }
 }

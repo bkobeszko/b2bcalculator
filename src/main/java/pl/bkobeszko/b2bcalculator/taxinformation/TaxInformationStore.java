@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Data
 public class TaxInformationStore {
     private static final Integer DEFAULT_YEAR = 2018;
-
+    
     private Map<Integer, Double> vatRate;
     private Map<Integer, Double> linearIncomeTaxRate;
     private Map<Integer, Double> scaleIncomeTaxRate1;
@@ -28,7 +28,7 @@ public class TaxInformationStore {
     private Map<Integer, Double> zusHealthInsuranceContributionToDeductRate;
     private Map<Integer, Double> zusWorkFund;
     private Map<Integer, Double> zusWorkFundPreferential;
-
+    
     public TaxInformation getTaxInformationForYear(int year) {
         Double currentVATRate = getDataByYear(vatRate, year);
         Double currentLinearIncomeTaxRate = getDataByYear(linearIncomeTaxRate, year);
@@ -42,7 +42,7 @@ public class TaxInformationStore {
         Double currentZUSHealthInsuranceContributionToDeductRate = getDataByYear(zusHealthInsuranceContributionToDeductRate, year);
         Money currentZUSWorkFund = CalculatorUtils.getMoneyOf(getDataByYear(zusWorkFund, year));
         Money currentZUSWorkFundPreferential = CalculatorUtils.getMoneyOf(getDataByYear(zusWorkFundPreferential, year));
-
+        
         return TaxInformation.builder()
                 .vatRate(currentVATRate)
                 .linearIncomeTaxRate(currentLinearIncomeTaxRate)
@@ -58,10 +58,10 @@ public class TaxInformationStore {
                 .zusWorkFundPreferential(currentZUSWorkFundPreferential)
                 .build();
     }
-
+    
     public Set<Integer> getYears() {
         Set<Integer> years = new HashSet<>();
-
+        
         years.addAll(vatRate.keySet());
         years.addAll(linearIncomeTaxRate.keySet());
         years.addAll(scaleIncomeTaxRate1.keySet());
@@ -73,17 +73,17 @@ public class TaxInformationStore {
         years.addAll(zusHealthInsuranceContributionToDeductRate.keySet());
         years.addAll(zusWorkFund.keySet());
         years.addAll(zusWorkFundPreferential.keySet());
-
+        
         return years;
     }
-
+    
     public List<Integer> getYearsSortedDescending() {
         return getYears()
                 .stream()
                 .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
     }
-
+    
     private Double getDataByYear(Map<Integer, Double> dataMap, int year) {
         // get minimal value from key set
         Integer minYear = dataMap
@@ -91,7 +91,7 @@ public class TaxInformationStore {
                 .stream()
                 .min(Integer::compare)
                 .orElse(DEFAULT_YEAR);
-
+        
         // get year lower or equal than parameter or minimal year
         Integer keyYear = dataMap
                 .keySet()
@@ -99,7 +99,7 @@ public class TaxInformationStore {
                 .filter(key -> key <= year)
                 .max(Integer::compare)
                 .orElse(minYear);
-
+        
         return dataMap.get(keyYear);
     }
 }

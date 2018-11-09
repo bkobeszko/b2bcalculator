@@ -17,29 +17,29 @@ import java.util.List;
  */
 @Controller
 public class MainController {
-
+    
     @Autowired
     private TaxInformationStoreFactory taxInformationStoreFactory;
-
+    
     @ModelAttribute("years")
     public List<Integer> years() {
         Integer actualYear = DateTime.now().getYear();
         List<Integer> yearsSortedDescending = taxInformationStoreFactory.getTaxInformationStore().getYearsSortedDescending();
-
+        
         List<Integer> years = new ArrayList<>();
-
+        
         if (!yearsSortedDescending.contains(actualYear)) {
             years.add(actualYear);
         }
-
+        
         years.addAll(yearsSortedDescending);
-
+        
         return years;
     }
-
-    @RequestMapping({"/","/index"})
+    
+    @RequestMapping({ "/", "/index" })
     public String index() {
         return "index";
     }
-
+    
 }

@@ -16,14 +16,14 @@ import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformationStoreFactory;
  */
 @Component
 public class B2BCalculatorComponent {
-
+    
     @Autowired
     TaxInformationStoreFactory taxInformationStoreFactory;
-
+    
     public YearlyCalculationSummary calculate(CalculatorInputData inputData) {
         TaxInformation taxInformation = taxInformationStoreFactory.getTaxInformationStore().getTaxInformationForYear(inputData.getYear());
         B2BCalculator calculator;
-
+        
         if (inputData.getTaxType() == TaxType.LINEAR) {
             calculator = new LinearTaxB2BCalculator();
         } else if (inputData.getTaxType() == TaxType.SCALE) {
@@ -32,7 +32,7 @@ public class B2BCalculatorComponent {
             // default
             calculator = new LinearTaxB2BCalculator();
         }
-
+        
         return calculator.calculateYearlySummary(inputData, taxInformation);
     }
 }

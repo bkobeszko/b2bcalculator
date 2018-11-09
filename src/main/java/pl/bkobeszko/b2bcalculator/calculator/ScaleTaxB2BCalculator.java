@@ -15,22 +15,22 @@ public class ScaleTaxB2BCalculator extends B2BCalculator {
     protected CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxInformation taxInformation, CalculationSummary summaryCumulative) {
         Money incomeToTax = summaryCumulative.getIncomeToTax();
         Money afterThreshold = incomeToTax.plus(summary.getIncomeToTax()).minus(taxInformation.getScaleIncomeTaxThreshold());
-
+        
         // checks if something is above the tax threshold
         if (afterThreshold.isGreaterThan(summary.getIncomeToTax())) {
             afterThreshold = summary.getIncomeToTax();
         }
-
+        
         // if some (or every) part of our cumulative yearly income is above the tax threshold
         if (afterThreshold.isPositive()) {
             Money belowThreshold = summary.getIncomeToTax().minus(afterThreshold);
-
+            
             // everything below threshold is taxed with first, lower tax rate
             if (belowThreshold.isGreaterThan(CalculatorUtils.getZeroMoney())) {
                 // this is the month where the threshold is reached
                 summary.setTax(summary.getTax().plus(CalculatorUtils.multiply(belowThreshold, taxInformation.getScaleIncomeTaxRate1())));
             }
-
+            
             // everything above threshold (surplus) is taxed with second, greater tax rate
             summary.setTax(summary.getTax().plus(CalculatorUtils.multiply(afterThreshold, taxInformation.getScaleIncomeTaxRate2())));
             summary.setScaleTaxThresholdReached(true);
@@ -38,7 +38,7 @@ public class ScaleTaxB2BCalculator extends B2BCalculator {
             // our yearly cumulative income has not reached the tax threshold, so it's taxed with first, lower tax rate
             summary.setTax(CalculatorUtils.multiply(summary.getIncomeToTax(), taxInformation.getScaleIncomeTaxRate1()));
         }
-
+        
         return summary;
     }
 }

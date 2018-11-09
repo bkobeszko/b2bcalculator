@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class B2BCalculatorApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(B2BCalculatorApplication.class, args);
-	}
+    
+    public static void main(String[] args) {
+        SpringApplication.run(B2BCalculatorApplication.class, args);
+    }
 }

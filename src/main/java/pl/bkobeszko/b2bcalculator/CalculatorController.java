@@ -35,24 +35,24 @@ import java.util.Locale;
 @RestController
 @Slf4j
 public class CalculatorController {
-
+    
     @Autowired
     @Getter
     private B2BCalculatorComponent b2BCalculatorComponent;
-
+    
     @RequestMapping(value = "/calculate", method = RequestMethod.POST)
     public YearlyCalculationSummarySimplified calculate(
             Locale locale,
-            @RequestParam(value="monthlyNetIncome") String monthlyNetIncome,
-            @RequestParam(value="monthlyCosts") String monthlyCosts,
-            @RequestParam(value="year") String year,
-            @RequestParam(value="payZUSHealthInsurance") String payZUSHealthInsurance,
-            @RequestParam(value="payVAT") String payVAT,
-            @RequestParam(value="taxType") String taxType,
-            @RequestParam(value="zusTaxType") String zusTaxType) {
-
+            @RequestParam(value = "monthlyNetIncome") String monthlyNetIncome,
+            @RequestParam(value = "monthlyCosts") String monthlyCosts,
+            @RequestParam(value = "year") String year,
+            @RequestParam(value = "payZUSHealthInsurance") String payZUSHealthInsurance,
+            @RequestParam(value = "payVAT") String payVAT,
+            @RequestParam(value = "taxType") String taxType,
+            @RequestParam(value = "zusTaxType") String zusTaxType) {
+        
         log.info("calculating invoked for {} monthly net income", monthlyNetIncome);
-
+        
         CalculatorInputData calculatorInputData = CalculatorInputData.builder()
                 .monthlyNetIncome(Double.parseDouble(monthlyNetIncome))
                 .monthlyCosts(StringUtils.isEmpty(monthlyCosts) ? 0d : Double.parseDouble(monthlyCosts))
@@ -62,11 +62,11 @@ public class CalculatorController {
                 .taxType(taxType.equalsIgnoreCase("SCALE") ? TaxType.SCALE : TaxType.LINEAR)
                 .zusTaxType(zusTaxType.equalsIgnoreCase("NORMAL") ? ZUSTaxType.NORMAL : ZUSTaxType.PREFERENTIAL)
                 .build();
-
+        
         YearlyCalculationSummary calculationSummary = getB2BCalculatorComponent().calculate(calculatorInputData);
         return convertToSimplified(locale, calculationSummary);
     }
-
+    
     private YearlyCalculationSummarySimplified convertToSimplified(Locale locale, YearlyCalculationSummary calculationSummary) {
         List<PeriodProfitSimplified> uniqueMonthlyProfits = new ArrayList<>();
         for (PeriodProfit periodProfit : calculationSummary.getCalculationStatistics().getUniqueMonthlyProfits()) {
@@ -77,12 +77,12 @@ public class CalculatorController {
                     .build()
             );
         }
-
+        
         CalculationStatisticsSimplified calculationStatisticsSimplified = CalculationStatisticsSimplified.builder()
                 .averageMonthlyProfit(formatMoney(locale, calculationSummary.getCalculationStatistics().getAverageMonthlyProfit()))
                 .uniqueMonthlyProfits(uniqueMonthlyProfits)
                 .build();
-
+        
         List<MonthlyCalculationSummarySimplified> monthlySummaries = new ArrayList<>();
         for (MonthlyCalculationSummary monthlyCalculationSummary : calculationSummary.getMonthlySummaries()) {
             monthlySummaries.add(MonthlyCalculationSummarySimplified.builder()
@@ -92,13 +92,13 @@ public class CalculatorController {
                     .build()
             );
         }
-
+        
         return YearlyCalculationSummarySimplified.builder()
                 .calculationStatistics(calculationStatisticsSimplified)
                 .monthlySummaries(monthlySummaries)
                 .build();
     }
-
+    
     private CalculationSummarySimplified formatSummary(Locale locale, CalculationSummary summary) {
         return CalculationSummarySimplified.builder()
                 .zus(ZUSTaxSimplified.builder()
@@ -106,7 +106,7 @@ public class CalculatorController {
                         .healthInsurance(formatMoney(locale, summary.getZus().getHealthInsurance()))
                         .healthInsuranceContributionToDeduct(formatMoney(locale, summary.getZus().getHealthInsuranceContributionToDeduct()))
                         .workFund(formatMoney(locale, summary.getZus().getWorkFund()))
-                        .total(formatMoney(locale,summary.getZus().getTotal()))
+                        .total(formatMoney(locale, summary.getZus().getTotal()))
                         .contributionToDeductFromIncome(formatMoney(locale, summary.getZus().getContributionToDeductFromIncome()))
                         .build()
                 )
@@ -121,14 +121,14 @@ public class CalculatorController {
                 .revenueCost(formatMoney(locale, summary.getRevenueCost()))
                 .build();
     }
-
+    
     private String formatMoney(Locale locale, Money money) {
-        MoneyFormatter moneyFormatter =  new MoneyFormatterBuilder()
+        MoneyFormatter moneyFormatter = new MoneyFormatterBuilder()
                 .appendAmountLocalized()
                 .appendLiteral(" ")
                 .appendCurrencySymbolLocalized()
                 .toFormatter(locale);
-
+        
         return moneyFormatter.print(money);
     }
 }

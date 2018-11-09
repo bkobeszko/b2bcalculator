@@ -1,7 +1,6 @@
 package pl.bkobeszko.b2bcalculator.calculator.summary;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.CalculationStatistics;
 
 import java.util.List;

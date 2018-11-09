@@ -10,7 +10,7 @@ import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformation;
  * @author Bartłomiej Kobeszko
  */
 public class LinearTaxB2BCalculator extends B2BCalculator {
-
+    
     @Override
     protected CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxInformation taxInformation, CalculationSummary summaryCumulative) {
         // this tax rule is simple - one, constant tax rate throughout the year

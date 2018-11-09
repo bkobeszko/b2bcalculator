@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
  */
 @SpringBootTest
 public class B2BCalculatorApplicationTests extends AbstractTestNGSpringContextTests {
-
-	/**
-	 * Tests application startup.
-	 */
-	@Test
-	public void contextLoads() {
-	}
-
+    
+    /**
+     * Tests application startup.
+     */
+    @Test
+    public void contextLoads() {
+    }
+    
 }

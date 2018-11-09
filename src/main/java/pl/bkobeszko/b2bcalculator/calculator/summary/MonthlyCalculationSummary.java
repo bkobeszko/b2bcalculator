@@ -12,7 +12,7 @@ public class MonthlyCalculationSummary {
     private int month;
     private CalculationSummary summary;
     private CalculationSummary summaryCumulative;
-
+    
     public MonthlyCalculationSummary(int month) {
         summary = CalculationSummary.builder().build();
         summaryCumulative = CalculationSummary.builder().build();

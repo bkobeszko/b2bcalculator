@@ -14,18 +14,18 @@ import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxType;
 public class CalculatorInputData {
     private double monthlyNetIncome;
     private double monthlyCosts;
-
+    
     @Builder.Default
     private int year = 2017;
-
+    
     @Builder.Default
     private boolean payZUSHealthInsurance = true;
-
+    
     @Builder.Default
     private boolean payVAT = true;
-
+    
     private TaxType taxType;
-
+    
     @Builder.Default
     private ZUSTaxType zusTaxType = ZUSTaxType.NORMAL;
 }

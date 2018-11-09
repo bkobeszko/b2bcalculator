@@ -22,26 +22,26 @@ import java.io.InputStream;
 public class TaxInformationStoreFactory {
     private static final String TAX_INFORMATION_FILE = "tax_information.yml";
     private TaxInformationStore taxInformationStore;
-
+    
     public TaxInformationStoreFactory() {
         TaxInformationStore taxInformationStoreLocal = createTaxInformationStore();
         setTaxInformationStore(taxInformationStoreLocal);
     }
-
+    
     public static TaxInformationStore createTaxInformationStore() {
         TaxInformationStore taxInformationStore = null;
-
+        
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-
+            
             try (InputStream stream = Resources.getResource(TAX_INFORMATION_FILE).openStream()) {
                 taxInformationStore = mapper.readValue(stream, TaxInformationStore.class);
             }
         } catch (IOException e) {
             log.error("error during reading tax information store: ", e);
         }
-
+        
         return taxInformationStore;
     }
 }
