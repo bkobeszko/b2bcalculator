@@ -73,11 +73,11 @@ public class B2BCalculatorComponentTest {
     @Test
     public void testStatisticsCalculationForScaleTaxAndPreferentialZUS() {
         CalculationStatistics expected = CalculationStatistics.builder()
-                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(8841.07))
+                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(8850.77))
                 .uniqueMonthlyProfits(Arrays.asList(
-                        new PeriodProfit(CalculatorUtils.getMoneyOf(9466.4), 1, 7),
-                        new PeriodProfit(CalculatorUtils.getMoneyOf(8454.4), 8, 8),
-                        new PeriodProfit(CalculatorUtils.getMoneyOf(7843.4), 9, 12)))
+                        new PeriodProfit(CalculatorUtils.getMoneyOf(9478.1), 1, 7),
+                        new PeriodProfit(CalculatorUtils.getMoneyOf(8450.1), 8, 8),
+                        new PeriodProfit(CalculatorUtils.getMoneyOf(7853.1), 9, 12)))
                 .build();
         
         CalculatorInputData inputData = CalculatorInputData.builder()
@@ -224,9 +224,9 @@ public class B2BCalculatorComponentTest {
     @Test
     public void testStatisticsCalculationForLinearTaxAndPreferentialZUS() {
         CalculationStatistics expected = CalculationStatistics.builder()
-                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(9350.4))
+                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(9362.1))
                 .uniqueMonthlyProfits(Arrays.asList(
-                        new PeriodProfit(CalculatorUtils.getMoneyOf(9350.4), 1, 12)))
+                        new PeriodProfit(CalculatorUtils.getMoneyOf(9362.10), 1, 12)))
                 .build();
         
         CalculatorInputData inputData = CalculatorInputData.builder()
@@ -422,9 +422,9 @@ public class B2BCalculatorComponentTest {
                 .socialInsurance(CalculatorUtils.getMoneyOf(190.62))
                 .healthInsurance(CalculatorUtils.getMoneyOf(297.28))
                 .healthInsuranceContributionToDeduct(CalculatorUtils.getMoneyOf(255.99))
-                .workFund(CalculatorUtils.getMoneyOf(14.70))
-                .total(CalculatorUtils.getMoneyOf(502.60))
-                .contributionToDeductFromIncome(CalculatorUtils.getMoneyOf(205.32))
+                .workFund(CalculatorUtils.getZeroMoney())
+                .total(CalculatorUtils.getMoneyOf(487.9))
+                .contributionToDeductFromIncome(CalculatorUtils.getMoneyOf(190.62))
                 .build();
         
         CalculatorInputData inputData = CalculatorInputData.builder()

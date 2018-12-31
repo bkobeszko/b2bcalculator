@@ -17,7 +17,7 @@ accidentBasisPart:
   2010: 0.0167
 
 workFundBasisPart:
-  2010: 0.0245
+  2010: 0
 
 healthBasisFactor:
   2010: 0.75
