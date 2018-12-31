@@ -63,6 +63,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.SCALE)
                 .zusTaxType(ZUSTaxType.NORMAL)
+                .year(2017)
                 .build();
         
         CalculationStatistics actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics();
@@ -84,6 +85,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.SCALE)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .year(2017)
                 .build();
         
         CalculationStatistics actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics();
@@ -103,6 +105,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
                 .zusTaxType(ZUSTaxType.NORMAL)
+                .year(2017)
                 .build();
         
         CalculationStatistics actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics();
@@ -114,6 +117,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(12000)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         int actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics().getUniqueMonthlyProfits().size();
@@ -125,6 +129,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(8500)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         int actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics().getUniqueMonthlyProfits().size();
@@ -136,6 +141,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(7000)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         int actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics().getUniqueMonthlyProfits().size();
@@ -150,6 +156,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(22000)
                 .taxType(TaxType.LINEAR)
+                .year(2017)
                 .build();
         
         int actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics().getUniqueMonthlyProfits().size();
@@ -161,6 +168,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(12000)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         List<MonthlyCalculationSummary> thresholdMonths = getMonthsWithThresholdReached(inputData);
@@ -177,6 +185,7 @@ public class B2BCalculatorComponentTest {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(8000)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         List<MonthlyCalculationSummary> thresholdMonths = getMonthsWithThresholdReached(inputData);
@@ -204,6 +213,7 @@ public class B2BCalculatorComponentTest {
                 .taxType(TaxType.LINEAR)
                 .payZUSHealthInsurance(false)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .year(2017)
                 .build();
         
         List<MonthlyCalculationSummary> thresholdMonths = getMonthsWithThresholdReached(inputData);
@@ -224,6 +234,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .year(2017)
                 .build();
         
         CalculationStatistics actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics();
@@ -258,6 +269,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         CalculationSummary actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(6).getSummary();
@@ -292,6 +304,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         CalculationSummary actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(7).getSummary();
@@ -326,6 +339,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.SCALE)
+                .year(2017)
                 .build();
         
         CalculationSummary actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(8).getSummary();
@@ -363,6 +377,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
+                .year(2017)
                 .build();
         
         List<MonthlyCalculationSummary> monthlySummaries = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries();
@@ -393,6 +408,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
+                .year(2017)
                 .build();
         
         ZUSTax actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(0).getSummary().getZus();
@@ -416,6 +432,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .year(2017)
                 .build();
         
         ZUSTax actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(0).getSummary().getZus();
@@ -436,6 +453,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
                 .payZUSHealthInsurance(false)
+                .year(2017)
                 .build();
         
         CalculationStatistics actual = b2bCalculatorComponent.calculate(inputData).getCalculationStatistics();
@@ -462,6 +480,7 @@ public class B2BCalculatorComponentTest {
                 .monthlyNetIncome(12000)
                 .taxType(TaxType.LINEAR)
                 .payVAT(false)
+                .year(2017)
                 .build();
         
         CalculationSummary actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(0).getSummary();
