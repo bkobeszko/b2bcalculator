@@ -1,0 +1,44 @@
+# years are mixed especially for tests
+
+VATRate:
+  2009: 0.23
+  1995: 0.20
+  1990: 0.10
+  2000: 0.15
+
+linearIncomeTaxRate:
+  2000: 0.20
+  1995: 0.13
+  1990: 0.25
+  2009: 0.19
+
+scaleIncomeTaxRate1:
+  2009: 0.18
+
+scaleIncomeTaxRate2:
+  2009: 0.32
+
+scaleIncomeTaxThreshold:
+  2009: 85528
+
+minimumSalary:
+  2019: 2250
+  2017: 2000
+
+estimatedAvgMonthlySalary:
+  2019: 4765
+  2017: 4263
+
+avgMonthlySalaryWithGainLastQt:
+  2018: 4739.91
+  2017: 4404.17
+
+ZUSTaxRule:
+  2019: ConstantOrProportional
+  2010: Constant
+
+socialBasisFactorNormalZUS:
+  2010: 0.6
+
+socialBasisFactorPreferentialZUS:
+  2010: 0.3

@@ -6,8 +6,8 @@ import pl.bkobeszko.b2bcalculator.calculator.B2BCalculator;
 import pl.bkobeszko.b2bcalculator.calculator.LinearTaxB2BCalculator;
 import pl.bkobeszko.b2bcalculator.calculator.ScaleTaxB2BCalculator;
 import pl.bkobeszko.b2bcalculator.calculator.summary.YearlyCalculationSummary;
-import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformation;
-import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformationStoreFactory;
+import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactors;
+import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactorsStoreFactory;
 
 /**
  * Copyright (c) 2018, GNU AGPL v. 3.0
@@ -18,10 +18,10 @@ import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformationStoreFactory;
 public class B2BCalculatorComponent {
     
     @Autowired
-    TaxInformationStoreFactory taxInformationStoreFactory;
+    TaxFactorsStoreFactory taxFactorsStoreFactory;
     
     public YearlyCalculationSummary calculate(CalculatorInputData inputData) {
-        TaxInformation taxInformation = taxInformationStoreFactory.getTaxInformationStore().getTaxInformationForYear(inputData.getYear());
+        TaxFactors taxFactors = taxFactorsStoreFactory.getTaxFactorsStore().getTaxFactorsForYear(inputData.getYear());
         B2BCalculator calculator;
         
         if (inputData.getTaxType() == TaxType.LINEAR) {
@@ -33,6 +33,6 @@ public class B2BCalculatorComponent {
             calculator = new LinearTaxB2BCalculator();
         }
         
-        return calculator.calculateYearlySummary(inputData, taxInformation);
+        return calculator.calculateYearlySummary(inputData, taxFactors);
     }
 }

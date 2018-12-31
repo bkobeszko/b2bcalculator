@@ -1,0 +1,154 @@
+# Sources:
+# VAT: http://wyborcza.pl/1,155290,14238581,20_lat_z_VAT.html
+# Tax: http://biznes.onet.pl/wiadomosci/kraj/historia-podatku-pit-w-polsce-jak-sie-zmienialy-ulgi-i-stawki/65j98p
+# Thresholds: http://www.pit.pl/archiwum_skali_podatkowej_pit_191.php
+# minimum wages: https://zus.pox.pl/zus/minimalne-wynagrodzenie-za-prace-obecnie-i-w-przeszlosci.htm
+# https://www.infor.pl/wskazniki/prawo-pracy-i-ubezpieczen-spolecznych/wynagrodzenia/54,Prognozowane-przecietne-miesieczne-wynagrodzenie-brutto-w-gospodarce-narodowej.html ; http://www.zus.pl/baza-wiedzy/skladki-wskazniki-odsetki/wskazniki/przecietne-wynagrodzenie-w-latach
+# http://stat.gov.pl/sygnalne/komunikaty-i-obwieszczenia/lista-komunikatow-i-obwieszczen/obwieszczenie-w-sprawie-przecietnego-miesiecznego-wynagrodzenia-w-sektorze-przedsiebiorstw-wlacznie-z-wyplatami-z-zysku-w-czwartym-kwartale-2017-roku,58,17.html
+
+VATRate:
+  2011: 0.23
+  1993: 0.22
+# no VAT before
+
+linearIncomeTaxRate:
+  2004: 0.19
+# no linear tax before
+
+scaleIncomeTaxRate1:
+  2009: 0.18
+  1998: 0.19
+  1997: 0.20
+  1994: 0.21
+  1992: 0.20
+
+scaleIncomeTaxRate2:
+  2009: 0.32
+  1998: 0.30
+  1997: 0.32
+  # before there was third threshold
+  1994: 0.33
+  1992: 0.30
+
+#scaleIncomeTaxRate3:
+## no rate 3 after this year
+#  1998: 0.40
+#  1997: 0.44
+#  1994: 0.45
+#  1992: 0.40
+
+scaleIncomeTaxThreshold:
+  2007: 85528
+  2001: 74048
+  2000: 65472
+  1999: 59248
+  1997: 50554
+  1996: 32760
+  1995: 24800
+  1994: 18160
+  1992: 12960
+
+# "Minimalne wynagrodzenie"
+# some values are the average from months
+minimumSalary:
+  2019: 2250
+  2018: 2100
+  2017: 2000
+  2016: 1850
+  2015: 1750
+  2014: 1680
+  2013: 1600
+  2012: 1500
+  2011: 1386
+  2010: 1317
+  2009: 1276
+  2008: 1126
+  2007: 936
+  2006: 899
+  2005: 849
+  2004: 824
+  2003: 800
+  2001: 760
+  2000: 700
+  1999: 599
+  1998: 500
+  1997: 415.67
+  1996: 348.33
+  1995: 285
+  1994: 215
+  1993: 163.33
+  1992: 114.5
+  1991: 62.78
+  1990: 44
+
+# "Prognozowane przeciętne miesięczne wynagrodzenie brutto"
+# to 2007 it is "real" salary, not estimated
+estimatedAvgMonthlySalary:
+  2019: 4765
+  2018: 4443
+  2017: 4263
+  2016: 4055
+  2015: 3959
+  2014: 3746
+  2013: 3713
+  2012: 3526
+  2011: 3359
+  2010: 3146
+  2009: 3193
+  2008: 2843
+  2007: 2691.03
+  2006: 2477.23
+  2005: 2380.29
+  2004: 2289.57
+  2003: 2201.47
+  2002: 2133.21
+  2001: 2061.85
+  2000: 1923.81
+  1999: 1706.74
+  1998: 1239.49
+  1997: 1061.93
+  1996: 873
+  1995: 702.62
+  1994: 532
+  1993: 399.5
+  1992: 293.5
+  1991: 177
+  1990: 102.96
+
+# "Przeciętne miesięczne wynagrodzenie w sektorze przedsiębiorstw, włącznie z wypłatami z zysku, w czwartym kwartale roku poprzedniego"
+# some values are the weighted average from months
+avgMonthlySalaryWithGainLastQt:
+  2019: 5000 # todo
+  2018: 4739.91
+  2017: 4404.17
+  2016: 4280.80
+  2015: 4139.42
+  2014: 4005.97
+  2013: 3877.50
+  2012: 3771.08
+  2011: 3605.75
+  2010: 3456.61
+  2009: 3300.13
+  2008: 3074.53
+  2007: 2775.19
+  2006: 2583.01
+  2005: 2473.77
+  2004: 2407.18
+  2003: 2154.03
+  2002: 1686.78
+  2001: 1611.03
+  2000: 1474.53
+  1999: 1201.36
+# no data before
+
+ZUSTaxRule:
+  2019: ConstantOrProportional
+  1990: Constant
+
+# "% prognozowanego przeciętnego miesięcznego wynagrodzenia brutto"
+socialBasisFactorNormalZUS:
+  1990: 0.6
+
+# "% minimalnego wynagrodzenia"
+socialBasisFactorPreferentialZUS:
+  1990: 0.3

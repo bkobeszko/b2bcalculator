@@ -15,7 +15,7 @@ import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.PeriodProfit;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTax;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxFactory;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxType;
-import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformation;
+import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactors;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
 public abstract class B2BCalculator {
     private static final int MONTHS_IN_YEAR = 12; // this is not supposed to change :)
     
-    protected abstract CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxInformation taxInformation, CalculationSummary summaryCumulative);
+    protected abstract CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxFactors taxFactors, CalculationSummary summaryCumulative);
     
-    public YearlyCalculationSummary calculateYearlySummary(CalculatorInputData inputData, TaxInformation taxInformation) {
+    public YearlyCalculationSummary calculateYearlySummary(CalculatorInputData inputData, TaxFactors taxFactors) {
         log.info("calculating yearly summary for {}", inputData);
         
-        List<MonthlyCalculationSummary> summariesMonth = calculateMonthSummaries(inputData, taxInformation);
+        List<MonthlyCalculationSummary> summariesMonth = calculateMonthSummaries(inputData, taxFactors);
         CalculationStatistics statistics = calculateStatistics(summariesMonth);
         
         return new YearlyCalculationSummary(summariesMonth, statistics);
@@ -69,13 +69,13 @@ public abstract class B2BCalculator {
                 .build();
     }
     
-    private List<MonthlyCalculationSummary> calculateMonthSummaries(CalculatorInputData inputData, TaxInformation taxInformation) {
-        ZUSTax zus = inputData.getZusTaxType() == ZUSTaxType.NORMAL ? ZUSTaxFactory.getNormalZUS(taxInformation, inputData.isPayZUSHealthInsurance()) : ZUSTaxFactory.getPreferentialZUS(taxInformation, inputData.isPayZUSHealthInsurance());
+    private List<MonthlyCalculationSummary> calculateMonthSummaries(CalculatorInputData inputData, TaxFactors taxFactors) {
+        ZUSTax zus = inputData.getZusTaxType() == ZUSTaxType.NORMAL ? ZUSTaxFactory.getNormalZUS(taxFactors, inputData.isPayZUSHealthInsurance()) : ZUSTaxFactory.getPreferentialZUS(taxFactors, inputData.isPayZUSHealthInsurance());
         CalculationSummary summaryCumulativeTotal = CalculationSummary.builder().build();
         List<MonthlyCalculationSummary> summariesMonth = new ArrayList<>();
         
         for (int i = 0; i < MONTHS_IN_YEAR; i++) {
-            CalculationSummary summary = calculateSummaryOneMonth(inputData, taxInformation, zus, summaryCumulativeTotal);
+            CalculationSummary summary = calculateSummaryOneMonth(inputData, taxFactors, zus, summaryCumulativeTotal);
             
             MonthlyCalculationSummary month = new MonthlyCalculationSummary(i + 1);
             month.setSummary(summary);
@@ -91,7 +91,7 @@ public abstract class B2BCalculator {
         return summariesMonth;
     }
     
-    private CalculationSummary calculateSummaryOneMonth(CalculatorInputData inputData, TaxInformation taxInformation, ZUSTax zus, CalculationSummary summaryCumulativeTotal) {
+    private CalculationSummary calculateSummaryOneMonth(CalculatorInputData inputData, TaxFactors taxFactors, ZUSTax zus, CalculationSummary summaryCumulativeTotal) {
         // helper variables to get code more readable
         Money monthlyNetIncome = CalculatorUtils.getMoneyOf(inputData.getMonthlyNetIncome());
         Money monthlyCosts = CalculatorUtils.getMoneyOf(inputData.getMonthlyCosts());
@@ -111,14 +111,14 @@ public abstract class B2BCalculator {
          * - revenueCost
          * - incomeToTax
          */
-        summaryOneMonth = calculateTax(summaryOneMonth, inputData.getTaxType(), taxInformation, summaryCumulativeTotal);
+        summaryOneMonth = calculateTax(summaryOneMonth, inputData.getTaxType(), taxFactors, summaryCumulativeTotal);
         
         summaryOneMonth.setTax(summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct));
         summaryOneMonth.setAdvancePaymentPIT(calculateAdvancePaymentPIT(summaryOneMonth.getTax()));
         
         Money vat = CalculatorUtils.getZeroMoney();
         if (inputData.isPayVAT()) {
-            vat = CalculatorUtils.multiply(monthlyNetIncome, taxInformation.getVatRate());
+            vat = CalculatorUtils.multiply(monthlyNetIncome, taxFactors.getVatRate());
         }
         
         summaryOneMonth.setVat(vat);

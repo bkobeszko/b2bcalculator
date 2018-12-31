@@ -1,0 +1,43 @@
+# Preferential ZUS exists since 2005
+
+retirementBasisPart:
+  2005: 0.1952
+
+# some values are the weighted average from months
+disabilityBasisPart:
+  2013: 0.08
+  2012: 0.0783
+  2008: 0.06
+  2007: 0.115
+  2005: 0.13
+
+diseaseBasisPart:
+  2005: 0.0245
+
+# some values are the weighted average from months
+accidentBasisPart:
+  2019: 0.0167
+  2018: 0.017025
+  2016: 0.018
+  2015: 0.018325
+  2013: 0.0193
+  2012: 0.01865
+  2010: 0.0167
+  2009: 0.017025
+  2007: 0.018
+  2006: 0.018325
+  2005: 0.0193
+
+workFundBasisPart:
+  2005: 0
+
+healthBasisFactor:
+  2005: 0.75
+
+healthBasisPart:
+  2007: 0.09
+  2006: 0.0875
+  2005: 0.0850
+
+healthBasisPartToDeductFromIncome:
+  2005: 0.0775

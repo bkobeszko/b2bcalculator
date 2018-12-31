@@ -13,8 +13,8 @@ import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.CalculationStati
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.PeriodProfit;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTax;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxType;
-import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformationStore;
-import pl.bkobeszko.b2bcalculator.taxinformation.TaxInformationStoreFactory;
+import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactorsStore;
+import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactorsStoreFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,23 +29,23 @@ import static org.mockito.Mockito.when;
  * @author Bartłomiej Kobeszko
  */
 public class B2BCalculatorComponentTest {
-    static TaxInformationStore taxInformationStore;
+    static TaxFactorsStore taxFactorsStore;
     
     @Mock
-    private TaxInformationStoreFactory taxInformationStoreFactory;
+    private TaxFactorsStoreFactory taxFactorsStoreFactory;
     
     @InjectMocks
     private B2BCalculatorComponent b2bCalculatorComponent;
     
     @BeforeClass
     public static void beforeClassSetUp() {
-        taxInformationStore = TaxInformationStoreFactory.createTaxInformationStore();
+        taxFactorsStore = TaxFactorsStoreFactory.createTaxFactorsStore();
     }
     
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(taxInformationStoreFactory.getTaxInformationStore()).thenReturn(taxInformationStore);
+        when(taxFactorsStoreFactory.getTaxFactorsStore()).thenReturn(taxFactorsStore);
     }
     
     @Test

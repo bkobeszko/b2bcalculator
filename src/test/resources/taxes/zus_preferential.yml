@@ -1,0 +1,29 @@
+retirementBasisPart:
+  2010: 0.1952
+
+disabilityBasisPart:
+  2013: 0.08
+  2012: 0.0783
+  2010: 0.06
+
+diseaseBasisPart:
+  2010: 0.0245
+
+accidentBasisPart:
+  2019: 0.0167
+  2018: 0.017025
+  2016: 0.018
+  2012: 0.01865
+  2010: 0.0167
+
+workFundBasisPart:
+  2010: 0.0245
+
+healthBasisFactor:
+  2010: 0.75
+
+healthBasisPart:
+  2010: 0.09
+
+healthBasisPartToDeductFromIncome:
+  2010: 0.0775

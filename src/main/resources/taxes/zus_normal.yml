@@ -1,0 +1,64 @@
+# Source: http://zus.pox.pl/zus_skladki_historyczne.htm, http://zus.pox.pl/skladki-preferencyjne-zus-archiwum-skladek-od-2005-roku.htm ; http://www.zus.pl/baza-wiedzy/skladki-wskazniki-odsetki/wskazniki/minimalna-podstawa-60-wymiaru-i-wysokosc-skladek-na-ubezpieczenia-spoleczne-ubezpieczenie-zdrowotne-i-fundusze-pozaubezpieczeniowe-od-1-stycznia-1999-r
+
+# "Społeczne - emerytalne"
+retirementBasisPart:
+  1999: 0.1952
+# no data before
+
+# "Społeczne - rentowe"
+# some values are the weighted average from months
+disabilityBasisPart:
+  2013: 0.08
+  2012: 0.0783
+  2008: 0.06
+  2007: 0.115
+  1999: 0.13
+# no data before
+
+# "Społeczne - chorobowe"
+diseaseBasisPart:
+  1999: 0.0245
+# no data before
+
+# "Społeczne - wypadkowe"
+# some values are the weighted average from months
+accidentBasisPart:
+  2019: 0.0167
+  2018: 0.017025
+  2016: 0.018
+  2015: 0.018325
+  2013: 0.0193
+  2012: 0.01865
+  2010: 0.0167
+  2009: 0.017025
+  2007: 0.018
+  2006: 0.018325
+  2003: 0.0193
+  1999: 0.0162
+# no data before
+
+# "Społeczne - Fundusz Pracy"
+workFundBasisPart:
+  1999: 0.0245
+# no data before
+
+# "% przeciętnego miesięcznego wynagrodzenia w czwartym kwartale roku poprzedniego, włącznie z wypłatami z zysku"
+healthBasisFactor:
+  1990: 0.75
+
+# "Zdrowotne"
+healthBasisPart:
+  2007: 0.09
+  2006: 0.0875
+  2005: 0.0850
+  2004: 0.0825
+  2003: 0.0800
+  2001: 0.0775
+  1999: 0.075
+# no data before
+
+# "Zdrowotne do odliczenia od podatku"
+healthBasisPartToDeductFromIncome:
+  2001: 0.0775
+  1999: 0.075
+# no data before
