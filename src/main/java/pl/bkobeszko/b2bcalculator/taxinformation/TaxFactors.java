@@ -14,17 +14,17 @@ import pl.bkobeszko.b2bcalculator.taxinformation.zus.ZUSTaxFactors;
 @Data
 @Builder
 public class TaxFactors {
-    private Double vatRate;
-    private Double linearIncomeTaxRate;
-    private Double scaleIncomeTaxRate1;
-    private Double scaleIncomeTaxRate2;
+    private double vatRate;
+    private double linearIncomeTaxRate;
+    private double scaleIncomeTaxRate1;
+    private double scaleIncomeTaxRate2;
     private Money scaleIncomeTaxThreshold;
     private Money minimumSalary;
     private Money estimatedAvgMonthlySalary;
     private Money avgMonthlySalaryWithGainLastQt;
     private ZUSTaxRule zusTaxRule;
-    private Double socialBasisFactorNormalZUS;
-    private Double socialBasisFactorPreferentialZUS;
+    private double socialBasisFactorNormalZUS;
+    private double socialBasisFactorPreferentialZUS;
     private ZUSTaxFactors normalZUS;
     private ZUSTaxFactors preferentialZUS;
 }

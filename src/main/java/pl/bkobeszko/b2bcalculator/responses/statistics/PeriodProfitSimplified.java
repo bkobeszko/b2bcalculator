@@ -12,6 +12,6 @@ import lombok.Data;
 @Builder
 public class PeriodProfitSimplified {
     private String profit;
-    private Integer startMonth;
-    private Integer endMonth;
+    private int startMonth;
+    private int endMonth;
 }

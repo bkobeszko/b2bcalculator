@@ -11,12 +11,12 @@ import lombok.Data;
 @Data
 @Builder
 public class ZUSTaxFactors {
-    private Double retirementBasisPart;
-    private Double disabilityBasisPart;
-    private Double diseaseBasisPart;
-    private Double accidentBasisPart;
-    private Double workFundBasisPart;
-    private Double healthBasisFactor;
-    private Double healthBasisPart;
-    private Double healthBasisPartToDeductFromIncome;
+    private double retirementBasisPart;
+    private double disabilityBasisPart;
+    private double diseaseBasisPart;
+    private double accidentBasisPart;
+    private double workFundBasisPart;
+    private double healthBasisFactor;
+    private double healthBasisPart;
+    private double healthBasisPartToDeductFromIncome;
 }
