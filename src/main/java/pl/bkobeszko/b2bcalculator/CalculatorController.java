@@ -57,10 +57,10 @@ public class CalculatorController {
                 .monthlyNetIncome(Double.parseDouble(monthlyNetIncome))
                 .monthlyCosts(StringUtils.isEmpty(monthlyCosts) ? 0d : Double.parseDouble(monthlyCosts))
                 .year(Integer.parseInt(year))
-                .payZUSHealthInsurance(payZUSHealthInsurance.equalsIgnoreCase("true") ? true : false)
-                .payVAT(payVAT.equalsIgnoreCase("true") ? true : false)
-                .taxType(taxType.equalsIgnoreCase("SCALE") ? TaxType.SCALE : TaxType.LINEAR)
-                .zusTaxType(zusTaxType.equalsIgnoreCase("NORMAL") ? ZUSTaxType.NORMAL : ZUSTaxType.PREFERENTIAL)
+                .payZUSHealthInsurance(Boolean.parseBoolean(payZUSHealthInsurance))
+                .payVAT(Boolean.parseBoolean(payVAT))
+                .taxType(TaxType.parseEnum(taxType, TaxType.LINEAR))
+                .zusTaxType(ZUSTaxType.parseEnum(zusTaxType, ZUSTaxType.NORMAL))
                 .build();
         
         YearlyCalculationSummary calculationSummary = getB2BCalculatorComponent().calculate(calculatorInputData);
