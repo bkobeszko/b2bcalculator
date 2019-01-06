@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import pl.bkobeszko.b2bcalculator.CalculatorInputData;
 import pl.bkobeszko.b2bcalculator.TaxType;
+import pl.bkobeszko.b2bcalculator.calculator.infos.ImportantInfoChecker;
 import pl.bkobeszko.b2bcalculator.calculator.summary.CalculationSummary;
+import pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo;
 import pl.bkobeszko.b2bcalculator.calculator.summary.MonthlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.YearlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.CalculationStatistics;
@@ -31,6 +33,8 @@ import java.util.stream.Collectors;
 public abstract class B2BCalculator {
     private static final int MONTHS_IN_YEAR = 12; // this is not supposed to change :)
     
+    private ImportantInfoChecker importantInfoChecker = new ImportantInfoChecker();
+    
     protected abstract CalculationSummary calculateTax(CalculationSummary summary, TaxType taxType, TaxFactors taxFactors, CalculationSummary summaryCumulative);
     
     public YearlyCalculationSummary calculateYearlySummary(CalculatorInputData inputData, TaxFactors taxFactors) {
@@ -38,8 +42,9 @@ public abstract class B2BCalculator {
         
         List<MonthlyCalculationSummary> summariesMonth = calculateMonthSummaries(inputData, taxFactors);
         CalculationStatistics statistics = calculateStatistics(summariesMonth);
+        List<ImportantInfo> importantInfos = importantInfoChecker.prepareImportantInfo(inputData, taxFactors, summariesMonth);
         
-        return new YearlyCalculationSummary(summariesMonth, statistics);
+        return new YearlyCalculationSummary(summariesMonth, statistics, importantInfos);
     }
     
     private CalculationStatistics calculateStatistics(List<MonthlyCalculationSummary> summariesMonth) {

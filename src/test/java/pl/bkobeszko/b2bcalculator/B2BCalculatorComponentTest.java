@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.bkobeszko.b2bcalculator.calculator.CalculatorUtils;
 import pl.bkobeszko.b2bcalculator.calculator.summary.CalculationSummary;
+import pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo;
 import pl.bkobeszko.b2bcalculator.calculator.summary.MonthlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.CalculationStatistics;
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.PeriodProfit;
@@ -487,5 +488,68 @@ public class B2BCalculatorComponentTest {
         
         assertThat(actual.getVat()).isEqualTo(CalculatorUtils.getMoneyOf(0));
         assertThat(actual.getTotalInvoiceSum()).isEqualTo(CalculatorUtils.getMoneyOf(inputData.getMonthlyNetIncome()));
+    }
+    
+    @Test
+    public void testNotPayVATButAlmostRequired() {
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(20050)
+                .taxType(TaxType.LINEAR)
+                .payVAT(false)
+                .year(2017)
+                .build();
+    
+        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
+        
+        assertThat(actual).isNotNull();
+        assertThat(actual.size()).isEqualTo(0);
+    }
+    
+    @Test
+    public void testNotPayVATButRequired() {
+        ImportantInfo expected = ImportantInfo.builder()
+                .type(ImportantInfo.Type.VATIsRequired)
+                .value(CalculatorUtils.getMoneyOf(200052))
+                .build();
+        
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(20060)
+                .taxType(TaxType.LINEAR)
+                .payVAT(false)
+                .year(2017)
+                .build();
+        
+        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
+        
+        assertThat(actual.size()).isEqualTo(1);
+        assertThat(actual.get(0)).isEqualTo(expected);
+    }
+    
+    @Test
+    public void testNotPayVATAndNotRequired() {
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(25000)
+                .taxType(TaxType.LINEAR)
+                .payVAT(true)
+                .year(2017)
+                .build();
+        
+        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
+    
+        assertThat(actual.size()).isEqualTo(0);
+    }
+    
+    @Test
+    public void testNotPayVATTooSmallTurnover() {
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(5000)
+                .taxType(TaxType.LINEAR)
+                .payVAT(false)
+                .year(2017)
+                .build();
+        
+        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
+        
+        assertThat(actual.size()).isEqualTo(0);
     }
 }

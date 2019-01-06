@@ -16,4 +16,5 @@ import java.util.List;
 public class YearlyCalculationSummarySimplified {
     private List<MonthlyCalculationSummarySimplified> monthlySummaries;
     private CalculationStatisticsSimplified calculationStatistics;
+    private List<ImportantInfoSimplified> importantInfos;
 }

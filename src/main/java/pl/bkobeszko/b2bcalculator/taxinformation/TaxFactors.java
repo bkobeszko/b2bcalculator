@@ -15,6 +15,7 @@ import pl.bkobeszko.b2bcalculator.taxinformation.zus.ZUSTaxFactors;
 @Builder
 public class TaxFactors {
     private double vatRate;
+    private Money vatLimit;
     private double linearIncomeTaxRate;
     private double scaleIncomeTaxRate1;
     private double scaleIncomeTaxRate2;

@@ -14,4 +14,5 @@ import java.util.List;
 public class YearlyCalculationSummary {
     private final List<MonthlyCalculationSummary> monthlySummaries;
     private final CalculationStatistics calculationStatistics;
+    private final List<ImportantInfo> importantInfos;
 }

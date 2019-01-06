@@ -1,5 +1,6 @@
 # Sources:
 # VAT: http://wyborcza.pl/1,155290,14238581,20_lat_z_VAT.html
+# VAT limits: https://www.pit.pl/limity-przejscia-na-vat/archiwum-limity-przejscia-na-vat-923026
 # Tax: http://biznes.onet.pl/wiadomosci/kraj/historia-podatku-pit-w-polsce-jak-sie-zmienialy-ulgi-i-stawki/65j98p
 # Thresholds: http://www.pit.pl/archiwum_skali_podatkowej_pit_191.php
 # minimum wages: https://zus.pox.pl/zus/minimalne-wynagrodzenie-za-prace-obecnie-i-w-przeszlosci.htm
@@ -9,6 +10,23 @@
 VATRate:
   2011: 0.23
   1993: 0.22
+# no VAT before
+
+VATLimit:
+  2017: 200000
+  2011: 150000
+  2010: 100000
+  2008: 50000
+  2007: 39700
+  2006: 39200
+  2005: 43800
+  2004: 45700
+  2003: 40900
+  2002: 38500
+  2001: 39800
+  1995: 80000
+  1994: 1200000
+  1993: 600000
 # no VAT before
 
 linearIncomeTaxRate:

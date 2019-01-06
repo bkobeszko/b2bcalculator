@@ -6,6 +6,9 @@ VATRate:
   1990: 0.10
   2000: 0.15
 
+VATLimit:
+  2000: 200000
+
 linearIncomeTaxRate:
   2000: 0.20
   1995: 0.13

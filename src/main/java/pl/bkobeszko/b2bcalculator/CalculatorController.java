@@ -16,16 +16,14 @@ import pl.bkobeszko.b2bcalculator.calculator.summary.MonthlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.YearlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.PeriodProfit;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxType;
-import pl.bkobeszko.b2bcalculator.responses.CalculationSummarySimplified;
-import pl.bkobeszko.b2bcalculator.responses.MonthlyCalculationSummarySimplified;
-import pl.bkobeszko.b2bcalculator.responses.YearlyCalculationSummarySimplified;
-import pl.bkobeszko.b2bcalculator.responses.ZUSTaxSimplified;
+import pl.bkobeszko.b2bcalculator.responses.*;
 import pl.bkobeszko.b2bcalculator.responses.statistics.CalculationStatisticsSimplified;
 import pl.bkobeszko.b2bcalculator.responses.statistics.PeriodProfitSimplified;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2018, GNU AGPL v. 3.0
@@ -93,9 +91,19 @@ public class CalculatorController {
             );
         }
         
+        List<ImportantInfoSimplified> importantInfoSimplified = calculationSummary.getImportantInfos()
+                .stream()
+                .map(info -> ImportantInfoSimplified.builder()
+                        .type(info.getType().name())
+                        .value(formatMoney(locale, info.getValue()))
+                        .build()
+                )
+                .collect(Collectors.toList());
+    
         return YearlyCalculationSummarySimplified.builder()
                 .calculationStatistics(calculationStatisticsSimplified)
                 .monthlySummaries(monthlySummaries)
+                .importantInfos(importantInfoSimplified)
                 .build();
     }
     

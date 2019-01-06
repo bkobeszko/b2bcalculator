@@ -20,6 +20,7 @@ import java.util.Set;
 public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     
     private Map<Integer, Double> vatRate;
+    private Map<Integer, Double> vatLimit;
     private Map<Integer, Double> linearIncomeTaxRate;
     private Map<Integer, Double> scaleIncomeTaxRate1;
     private Map<Integer, Double> scaleIncomeTaxRate2;
@@ -36,6 +37,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     @Override
     public TaxFactors getTaxFactorsForYear(int year) {
         Double currentVATRate = getDataDoubleByYear(vatRate, year);
+        Money currentVATLimit = CalculatorUtils.getMoneyOf(getDataDoubleByYear(vatLimit, year));
         Double currentLinearIncomeTaxRate = getDataDoubleByYear(linearIncomeTaxRate, year);
         Double currentScaleIncomeTaxRate1 = getDataDoubleByYear(scaleIncomeTaxRate1, year);
         Double currentScaleIncomeTaxRate2 = getDataDoubleByYear(scaleIncomeTaxRate2, year);
@@ -51,6 +53,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     
         return TaxFactors.builder()
                 .vatRate(currentVATRate)
+                .vatLimit(currentVATLimit)
                 .linearIncomeTaxRate(currentLinearIncomeTaxRate)
                 .scaleIncomeTaxRate1(currentScaleIncomeTaxRate1)
                 .scaleIncomeTaxRate2(currentScaleIncomeTaxRate2)
@@ -71,6 +74,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
         Set<Integer> years = new HashSet<>();
         
         years.addAll(vatRate.keySet());
+        years.addAll(vatLimit.keySet());
         years.addAll(linearIncomeTaxRate.keySet());
         years.addAll(scaleIncomeTaxRate1.keySet());
         years.addAll(scaleIncomeTaxRate2.keySet());
