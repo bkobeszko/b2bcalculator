@@ -66,30 +66,29 @@ public class CalculatorController {
     }
     
     private YearlyCalculationSummarySimplified convertToSimplified(Locale locale, YearlyCalculationSummary calculationSummary) {
-        List<PeriodProfitSimplified> uniqueMonthlyProfits = new ArrayList<>();
-        for (PeriodProfit periodProfit : calculationSummary.getCalculationStatistics().getUniqueMonthlyProfits()) {
-            uniqueMonthlyProfits.add(PeriodProfitSimplified.builder()
-                    .profit(formatMoney(locale, periodProfit.getProfit()))
-                    .startMonth(periodProfit.getStartMonth())
-                    .endMonth(periodProfit.getEndMonth())
-                    .build()
-            );
-        }
+        List<PeriodProfitSimplified> uniqueMonthlyProfits = calculationSummary.getCalculationStatistics().getUniqueMonthlyProfits()
+                .stream()
+                .map(periodProfit -> PeriodProfitSimplified.builder()
+                        .profit(formatMoney(locale, periodProfit.getProfit()))
+                        .startMonth(periodProfit.getStartMonth())
+                        .endMonth(periodProfit.getEndMonth())
+                        .build())
+                .collect(Collectors.toList());
         
         CalculationStatisticsSimplified calculationStatisticsSimplified = CalculationStatisticsSimplified.builder()
                 .averageMonthlyProfit(formatMoney(locale, calculationSummary.getCalculationStatistics().getAverageMonthlyProfit()))
                 .uniqueMonthlyProfits(uniqueMonthlyProfits)
                 .build();
         
-        List<MonthlyCalculationSummarySimplified> monthlySummaries = new ArrayList<>();
-        for (MonthlyCalculationSummary monthlyCalculationSummary : calculationSummary.getMonthlySummaries()) {
-            monthlySummaries.add(MonthlyCalculationSummarySimplified.builder()
-                    .month(monthlyCalculationSummary.getMonth())
-                    .summary(formatSummary(locale, monthlyCalculationSummary.getSummary()))
-                    .summaryCumulative(formatSummary(locale, monthlyCalculationSummary.getSummaryCumulative()))
-                    .build()
-            );
-        }
+        List<MonthlyCalculationSummarySimplified> monthlySummaries = calculationSummary.getMonthlySummaries()
+                .stream()
+                .map(monthlyCalculationSummary -> MonthlyCalculationSummarySimplified.builder()
+                        .month(monthlyCalculationSummary.getMonth())
+                        .summary(formatSummary(locale, monthlyCalculationSummary.getSummary()))
+                        .summaryCumulative(formatSummary(locale, monthlyCalculationSummary.getSummaryCumulative()))
+                        .build()
+                )
+                .collect(Collectors.toList());
         
         List<ImportantInfoSimplified> importantInfoSimplified = calculationSummary.getImportantInfos()
                 .stream()
