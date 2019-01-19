@@ -185,6 +185,35 @@
         {{/ifGreaterThan}}
     </div>
 
+    {{#if importantInfos}}
+    <div class="ui stackable centered grid">
+        <div class="ui accordion important_info">
+            <div class="title">
+                <i class="dropdown icon"></i>
+                [[#{result.importantInfos}]]
+            </div>
+            <div class="content">
+                <div class="ui stackable grid">
+
+                    {{#each importantInfos}}
+                    <div class="ui one column row">
+                        <div class="seven wide centered column">
+                            <div class="ui info message" >
+                                <div class="content">
+                                    <div class="header">{{#getInfoHeader type}}{{/getInfoHeader}}</div>
+                                    <p>{{#getInfoMessage type value}}{{/getInfoMessage}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
     <h4 class="ui horizontal divider header" th:inline="text">
         <i class="calendar alternate outline icon"></i>
         [[#{result.yearDetails}]]
@@ -270,6 +299,14 @@
         [[#{months.november}]],
         [[#{months.december}]]
     ];
+
+    var importantInfosArray = [
+        ["header.ZUSCouldBeProportional", [[#{result.importantInfos.header.ZUSCouldBeProportional}]]],
+        ["header.VATIsRequired", [[#{result.importantInfos.header.VATIsRequired}]]],
+        ["message.ZUSCouldBeProportional", [[#{result.importantInfos.message.ZUSCouldBeProportional}]]],
+        ["message.VATIsRequired", [[#{result.importantInfos.message.VATIsRequired}]]]
+    ];
+    ImportantInfos = new Map(importantInfosArray);
 </script>
 
 <th:block th:include="fragments/scripts/scripts :: scripts" ></th:block>

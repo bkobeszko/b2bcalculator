@@ -23,3 +23,11 @@ Handlebars.registerHelper("getMonth", function(value) {
 Handlebars.registerHelper("getLastItem", function(value) {
     return value[value.length - 1];
 });
+
+Handlebars.registerHelper("getInfoHeader", function(key) {
+    return ImportantInfos.get("header." + key);
+});
+
+Handlebars.registerHelper("getInfoMessage", function(key, moneyValue) {
+    return ImportantInfos.get("message." + key).replace("%s", moneyValue);
+});

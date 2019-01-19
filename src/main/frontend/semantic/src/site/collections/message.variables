@@ -1,0 +1,8 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@infoBackgroundColor: darken(@pageBackground, 5%);
+@infoHeaderColor: @textColor;
+@infoTextColor: @textColor;
+@infoBorderColor: lighten(@infoTextColor, 40%);

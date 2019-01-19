@@ -1,1 +1,3 @@
 @titleFontSize: @accordionTitleFontSize;
+@importantInfoMargin: 1em;
+@importantInfoTitleFontWeight: bold;
