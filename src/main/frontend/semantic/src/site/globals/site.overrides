@@ -2,8 +2,8 @@
          Site Overrides
 *******************************/
 
-.disclaimer {
-   font-size: @fontSize * 0.7;
+.disclaimer, .app_info {
+   font-size: @footerSmallFontSize;
 }
 
 .auto_scrollbar {

@@ -32,3 +32,5 @@
 @invertedTextColor: @pageBackground;
 
 @accordionTitleFontSize: @fontSize * 1.1;
+
+@footerSmallFontSize: @fontSize * 0.7;

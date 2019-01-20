@@ -25,11 +25,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="twelve wide column">
+                <div class="eight wide column">
                     <p>
                         <a href="https://beskode.pl">BESKODE</a>
                     </p>
                     <p class="disclaimer" th:text="#{disclaimer}">Autor nie bierze odpowiedzialności za użycie wyników w rozliczeniach podatkowych.</p>
+                </div>
+                <div class="four wide column app_info">
+                    <p th:text="#{app.versionText} + ${applicationVersion}">Wersja: 1.0.0</p>
+                    <p th:text="#{app.taxUpdateDateText} + ${taxUpdateDate}">Data aktualizacji podatków: 2019-01-19</p>
                 </div>
             </div>
         </div>
