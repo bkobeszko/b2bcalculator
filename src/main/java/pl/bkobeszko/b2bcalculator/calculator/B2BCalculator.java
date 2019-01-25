@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class B2BCalculator {
-    private static final int MONTHS_IN_YEAR = 12; // this is not supposed to change :)
+    static final int MONTHS_IN_YEAR = 12; // this is not supposed to change :)
     
     private ImportantInfoChecker importantInfoChecker = new ImportantInfoChecker();
     
@@ -103,11 +103,16 @@ public abstract class B2BCalculator {
         Money contributionToDeductFromIncome = zus.getContributionToDeductFromIncome();
         Money healthInsuranceContributionToDeduct = zus.getHealthInsuranceContributionToDeduct();
         Money zusTotal = zus.getTotal();
+        Money incomeToTax = monthlyNetIncome.minus(monthlyCosts).minus(contributionToDeductFromIncome);
+        
+        // if income is lower than ZUS contribution to deduct
+        incomeToTax = setToZeroIfNegative(incomeToTax);
         
         CalculationSummary summaryOneMonth = CalculationSummary.builder()
                 .zus(zus)
                 .netInvoiceSum(monthlyNetIncome)
-                .revenueCost(monthlyCosts).incomeToTax(monthlyNetIncome.minus(monthlyCosts).minus(contributionToDeductFromIncome))
+                .revenueCost(monthlyCosts)
+                .incomeToTax(incomeToTax)
                 .build();
         
         /* Very important! Tax calculation must be directly after set the:
@@ -117,8 +122,11 @@ public abstract class B2BCalculator {
          * - incomeToTax
          */
         summaryOneMonth = calculateTax(summaryOneMonth, inputData.getTaxType(), taxFactors, summaryCumulativeTotal);
+    
+        Money tax = summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct);
+        tax = setToZeroIfNegative(tax);
         
-        summaryOneMonth.setTax(summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct));
+        summaryOneMonth.setTax(tax);
         summaryOneMonth.setAdvancePaymentPIT(calculateAdvancePaymentPIT(summaryOneMonth.getTax()));
         
         Money vat = CalculatorUtils.getZeroMoney();
@@ -128,9 +136,20 @@ public abstract class B2BCalculator {
         
         summaryOneMonth.setVat(vat);
         summaryOneMonth.setTotalInvoiceSum(monthlyNetIncome.plus(summaryOneMonth.getVat()));
-        summaryOneMonth.setProfit(monthlyNetIncome.minus(monthlyCosts).minus(zusTotal).minus(summaryOneMonth.getAdvancePaymentPIT()));
+        summaryOneMonth.setProfit(monthlyNetIncome
+                .minus(monthlyCosts)
+                .minus(zusTotal)
+                .minus(summaryOneMonth.getAdvancePaymentPIT()));
         
         return summaryOneMonth;
+    }
+    
+    private Money setToZeroIfNegative(Money money) {
+        if (money.isNegative()) {
+            money = CalculatorUtils.getZeroMoney();
+        }
+        
+        return money;
     }
     
     /**
