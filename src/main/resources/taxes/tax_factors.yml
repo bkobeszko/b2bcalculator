@@ -3,6 +3,7 @@
 # VAT limits: https://www.pit.pl/limity-przejscia-na-vat/archiwum-limity-przejscia-na-vat-923026
 # Tax: http://biznes.onet.pl/wiadomosci/kraj/historia-podatku-pit-w-polsce-jak-sie-zmienialy-ulgi-i-stawki/65j98p
 # Thresholds: http://www.pit.pl/archiwum_skali_podatkowej_pit_191.php
+# Tax free amount: https://pl.wikipedia.org/wiki/Kwota_wolna_od_podatku
 # minimum wages: https://zus.pox.pl/zus/minimalne-wynagrodzenie-za-prace-obecnie-i-w-przeszlosci.htm
 # https://www.infor.pl/wskazniki/prawo-pracy-i-ubezpieczen-spolecznych/wynagrodzenia/54,Prognozowane-przecietne-miesieczne-wynagrodzenie-brutto-w-gospodarce-narodowej.html ; http://www.zus.pl/baza-wiedzy/skladki-wskazniki-odsetki/wskazniki/przecietne-wynagrodzenie-w-latach
 # http://stat.gov.pl/sygnalne/komunikaty-i-obwieszczenia/lista-komunikatow-i-obwieszczen/obwieszczenie-w-sprawie-przecietnego-miesiecznego-wynagrodzenia-w-sektorze-przedsiebiorstw-wlacznie-z-wyplatami-z-zysku-w-czwartym-kwartale-2017-roku,58,17.html
@@ -65,6 +66,18 @@ scaleIncomeTaxThreshold:
   1995: 24800
   1994: 18160
   1992: 12960
+
+# "Kwota wolna od podatku"
+taxFreeAmount:
+  2018: 8000
+  2017: 6600
+  2009: 3091
+  2007: 3013.37
+  2003: 2789.89
+  2002: 2727.16
+  2001: 2596.43
+  2000: 2295.79
+  1992: 432
 
 # "Minimalne wynagrodzenie"
 # some values are the average from months

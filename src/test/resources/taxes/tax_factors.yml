@@ -1,4 +1,4 @@
-# years are mixed especially for tests
+# years are mixed (not in order) especially for tests
 
 VATRate:
   2009: 0.23
@@ -23,6 +23,11 @@ scaleIncomeTaxRate2:
 
 scaleIncomeTaxThreshold:
   2009: 85528
+
+taxFreeAmount:
+  2018: 8000
+  2017: 6600
+  2009: 3091
 
 minimumSalary:
   2019: 2250

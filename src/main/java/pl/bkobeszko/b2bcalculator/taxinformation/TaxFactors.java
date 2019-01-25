@@ -20,6 +20,7 @@ public class TaxFactors {
     private double scaleIncomeTaxRate1;
     private double scaleIncomeTaxRate2;
     private Money scaleIncomeTaxThreshold;
+    private Money taxFreeAmount;
     private Money minimumSalary;
     private Money estimatedAvgMonthlySalary;
     private Money avgMonthlySalaryWithGainLastQt;

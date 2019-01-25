@@ -25,6 +25,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     private Map<Integer, Double> scaleIncomeTaxRate1;
     private Map<Integer, Double> scaleIncomeTaxRate2;
     private Map<Integer, Double> scaleIncomeTaxThreshold;
+    private Map<Integer, Double> taxFreeAmount;
     private Map<Integer, Double> minimumSalary;
     private Map<Integer, Double> estimatedAvgMonthlySalary;
     private Map<Integer, Double> avgMonthlySalaryWithGainLastQt;
@@ -42,6 +43,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
         Double currentScaleIncomeTaxRate1 = getDataDoubleByYear(scaleIncomeTaxRate1, year);
         Double currentScaleIncomeTaxRate2 = getDataDoubleByYear(scaleIncomeTaxRate2, year);
         Money currentScaleIncomeTaxThreshold = CalculatorUtils.getMoneyOf(getDataDoubleByYear(scaleIncomeTaxThreshold, year));
+        Money currentTaxFreeAmount = CalculatorUtils.getMoneyOf(getDataDoubleByYear(taxFreeAmount, year));
         Money currentMinimumSalary = CalculatorUtils.getMoneyOf(getDataDoubleByYear(minimumSalary, year));
         Money currentEstimatedAvgMonthlySalary = CalculatorUtils.getMoneyOf(getDataDoubleByYear(estimatedAvgMonthlySalary, year));
         Money currentAvgMonthlySalaryWithGainLastQt = CalculatorUtils.getMoneyOf(getDataDoubleByYear(avgMonthlySalaryWithGainLastQt, year));
@@ -58,6 +60,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
                 .scaleIncomeTaxRate1(currentScaleIncomeTaxRate1)
                 .scaleIncomeTaxRate2(currentScaleIncomeTaxRate2)
                 .scaleIncomeTaxThreshold(currentScaleIncomeTaxThreshold)
+                .taxFreeAmount(currentTaxFreeAmount)
                 .minimumSalary(currentMinimumSalary)
                 .estimatedAvgMonthlySalary(currentEstimatedAvgMonthlySalary)
                 .avgMonthlySalaryWithGainLastQt(currentAvgMonthlySalaryWithGainLastQt)
@@ -79,6 +82,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
         years.addAll(scaleIncomeTaxRate1.keySet());
         years.addAll(scaleIncomeTaxRate2.keySet());
         years.addAll(scaleIncomeTaxThreshold.keySet());
+        years.addAll(taxFreeAmount.keySet());
         years.addAll(minimumSalary.keySet());
         years.addAll(estimatedAvgMonthlySalary.keySet());
         years.addAll(avgMonthlySalaryWithGainLastQt.keySet());
