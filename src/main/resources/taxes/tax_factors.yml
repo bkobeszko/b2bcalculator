@@ -149,7 +149,7 @@ estimatedAvgMonthlySalary:
 # "Przeciętne miesięczne wynagrodzenie w sektorze przedsiębiorstw, włącznie z wypłatami z zysku, w czwartym kwartale roku poprzedniego"
 # some values are the weighted average from months
 avgMonthlySalaryWithGainLastQt:
-  2019: 5000 # todo
+  2019: 5071.41
   2018: 4739.91
   2017: 4404.17
   2016: 4280.80
