@@ -118,7 +118,14 @@ public abstract class B2BCalculator {
          */
         summaryOneMonth = calculateTax(summaryOneMonth, inputData.getTaxType(), taxFactors, summaryCumulativeTotal);
         
-        summaryOneMonth.setTax(summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct));
+        Money taxWithoutHealthContribution = summaryOneMonth.getTax().minus(healthInsuranceContributionToDeduct);
+        
+        // TODO simple hack, remove it when tax will be calculated with tax free amount etc.
+        if (taxWithoutHealthContribution.isLessThan(CalculatorUtils.getZeroMoney())) {
+            taxWithoutHealthContribution = CalculatorUtils.getZeroMoney();
+        }
+        
+        summaryOneMonth.setTax(taxWithoutHealthContribution);
         summaryOneMonth.setAdvancePaymentPIT(calculateAdvancePaymentPIT(summaryOneMonth.getTax()));
         
         Money vat = CalculatorUtils.getZeroMoney();
