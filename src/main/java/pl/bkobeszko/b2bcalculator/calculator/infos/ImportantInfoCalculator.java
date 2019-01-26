@@ -18,7 +18,7 @@ public interface ImportantInfoCalculator {
      * @param inputData
      * @param taxFactors
      * @param lastMonthSummary
-     * @return empty if validation calculation is not necessary
+     * @return optional empty if validation calculation is not necessary
      */
     Optional<ImportantInfo> calculate(CalculatorInputData inputData, TaxFactors taxFactors, MonthlyCalculationSummary lastMonthSummary);
 }

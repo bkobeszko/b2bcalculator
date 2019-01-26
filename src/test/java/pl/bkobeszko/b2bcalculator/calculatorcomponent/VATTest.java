@@ -6,10 +6,13 @@ import pl.bkobeszko.b2bcalculator.TaxType;
 import pl.bkobeszko.b2bcalculator.calculator.CalculatorUtils;
 import pl.bkobeszko.b2bcalculator.calculator.summary.CalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo;
+import pl.bkobeszko.b2bcalculator.utils.ImportantInfoFinder;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.VATIsRequired;
 
 /**
  * Copyright (c) 2019, GNU AGPL v. 3.0
@@ -17,6 +20,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @author Bartłomiej Kobeszko
  */
 public class VATTest extends B2BCalculatorComponentBaseTest {
+    
+    private ImportantInfoFinder importantInfoFinder = new ImportantInfoFinder(VATIsRequired);
     
     @Test
     public void testWithPayingTheVAT() {
@@ -59,13 +64,16 @@ public class VATTest extends B2BCalculatorComponentBaseTest {
         List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
         
         assertThat(actual).isNotNull();
-        assertThat(actual.size()).isEqualTo(0);
+    
+        Optional<ImportantInfo> importantInfo = importantInfoFinder.find(actual);
+    
+        assertThat(importantInfo.isPresent()).isEqualTo(false);
     }
     
     @Test
     public void testNotPayVATButRequired() {
         ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.VATIsRequired)
+                .type(VATIsRequired)
                 .value(CalculatorUtils.getMoneyOf(200052))
                 .build();
         
@@ -75,11 +83,11 @@ public class VATTest extends B2BCalculatorComponentBaseTest {
                 .payVAT(false)
                 .year(2017)
                 .build();
-        
-        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
-        
-        assertThat(actual.size()).isEqualTo(1);
-        assertThat(actual.get(0)).isEqualTo(expected);
+    
+        Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
+    
+        assertThat(importantInfo.isPresent()).isEqualTo(true);
+        assertThat(importantInfo.get()).isEqualTo(expected);
     }
     
     @Test
@@ -90,10 +98,10 @@ public class VATTest extends B2BCalculatorComponentBaseTest {
                 .payVAT(true)
                 .year(2017)
                 .build();
-        
-        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
-        
-        assertThat(actual.size()).isEqualTo(0);
+    
+        Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
+    
+        assertThat(importantInfo.isPresent()).isEqualTo(false);
     }
     
     @Test
@@ -105,8 +113,8 @@ public class VATTest extends B2BCalculatorComponentBaseTest {
                 .year(2017)
                 .build();
         
-        List<ImportantInfo> actual = b2bCalculatorComponent.calculate(inputData).getImportantInfos();
-        
-        assertThat(actual.size()).isEqualTo(0);
+        Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
+    
+        assertThat(importantInfo.isPresent()).isEqualTo(false);
     }
 }

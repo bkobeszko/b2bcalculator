@@ -29,6 +29,13 @@ public class ZUSTaxFactory {
         return buildZUSTax(zusTaxFactors, basis, basisFactor, taxFactors.getAvgMonthlySalaryWithGainLastQt(), includeHealthInsurance);
     }
     
+    public static ZUSTax getProportionalZUS(TaxFactors taxFactors, Money basis, boolean includeHealthInsurance) {
+        ZUSTaxFactors zusTaxFactors = taxFactors.getNormalZUS();
+        Double basisFactor = 1d;
+    
+        return buildZUSTax(zusTaxFactors, basis, basisFactor, taxFactors.getAvgMonthlySalaryWithGainLastQt(), includeHealthInsurance);
+    }
+    
     public static ZUSTax getEmptyZUS() {
         return ZUSTax.builder().build();
     }

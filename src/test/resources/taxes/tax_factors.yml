@@ -30,7 +30,7 @@ taxFreeAmount:
   2009: 3091
 
 minimumSalary:
-  2019: 2250
+  2019: 1000
   2017: 2000
 
 estimatedAvgMonthlySalary:
@@ -42,10 +42,11 @@ avgMonthlySalaryWithGainLastQt:
   2017: 4404.17
 
 ZUSTaxRule:
-  2019: ConstantOrProportional
+  2017: ConstantOrProportional
   2010: Constant
 
 socialBasisFactorNormalZUS:
+  2019: 0.2
   2010: 0.6
 
 socialBasisFactorPreferentialZUS:

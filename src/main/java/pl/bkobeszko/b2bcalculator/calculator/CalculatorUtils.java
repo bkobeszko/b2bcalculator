@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
@@ -26,6 +27,10 @@ public class CalculatorUtils {
     private CalculatorUtils() {}
     
     public static Money getMoneyOf(double amount) {
+        return getMoneyOf(BigDecimal.valueOf(amount));
+    }
+    
+    public static Money getMoneyOf(BigDecimal amount) {
         return Money.of(CURRENCY_UNIT, amount, ROUNDING_MODE);
     }
     
@@ -37,11 +42,19 @@ public class CalculatorUtils {
         return multiply(money2, money1);
     }
     
+    public static Money multiply(Money money1, BigDecimal money2) {
+        return multiply(money1, money2.doubleValue());
+    }
+    
     public static Money divide(Money money1, double money2) {
         return money1.dividedBy(money2, ROUNDING_MODE);
     }
     
     public static Money divide(double money1, Money money2) {
         return divide(money2, money1);
+    }
+    
+    public static Money divide(Money money1, Money money2) {
+        return money1.dividedBy(money2.getAmount(), ROUNDING_MODE);
     }
 }
