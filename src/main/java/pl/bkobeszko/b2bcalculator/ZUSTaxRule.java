@@ -6,5 +6,5 @@ package pl.bkobeszko.b2bcalculator;
  * @author Bartłomiej Kobeszko
  */
 public enum ZUSTaxRule {
-    Constant, ConstantOrProportional
+    CONSTANT, CONSTANT_OR_PROPORTIONAL
 }

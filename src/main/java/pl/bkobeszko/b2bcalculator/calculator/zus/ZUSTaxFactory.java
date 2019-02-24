@@ -40,25 +40,27 @@ public class ZUSTaxFactory {
         return ZUSTax.builder().build();
     }
     
-    private static ZUSTax buildZUSTax(ZUSTaxFactors zusTaxFactors, Money basis, Double basisFactor, Money healthBasisIndicator, boolean includeHealthInsurance) {
+    private static ZUSTax buildZUSTax(ZUSTaxFactors zusTaxFactors, Money basis, Double basisFactor, Money healthBasisIndicator, boolean includeDiseaseInsurance) {
         Money basisPart = CalculatorUtils.multiply(basis, basisFactor);
         
         // four ingredients of social contribution
         Money retirementContribution = CalculatorUtils.multiply(basisPart, zusTaxFactors.getRetirementBasisPart());
         Money disabilityContribution = CalculatorUtils.multiply(basisPart, zusTaxFactors.getDisabilityBasisPart());
-        Money diseaseContribution = CalculatorUtils.multiply(basisPart, zusTaxFactors.getDiseaseBasisPart());
         Money accidentContribution = CalculatorUtils.multiply(basisPart, zusTaxFactors.getAccidentBasisPart());
+        Money diseaseContribution;
+        
+        if (includeDiseaseInsurance) {
+            diseaseContribution = CalculatorUtils.multiply(basisPart, zusTaxFactors.getDiseaseBasisPart());
+        } else {
+            diseaseContribution = CalculatorUtils.getZeroMoney();
+        }
+        
         Money socialInsurance = retirementContribution
                 .plus(disabilityContribution)
                 .plus(diseaseContribution)
                 .plus(accidentContribution);
     
         Money workFund = CalculatorUtils.multiply(basisPart, zusTaxFactors.getWorkFundBasisPart());
-    
-        // a temporary hack:)
-        if (!includeHealthInsurance) {
-            healthBasisIndicator = CalculatorUtils.getZeroMoney();
-        }
         
         Money healthBasis = CalculatorUtils.multiply(healthBasisIndicator, zusTaxFactors.getHealthBasisFactor());
         Money healthInsurance = CalculatorUtils.multiply(healthBasis, zusTaxFactors.getHealthBasisPart());

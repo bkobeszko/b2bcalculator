@@ -7,20 +7,14 @@ import org.joda.money.format.MoneyFormatter;
 import org.joda.money.format.MoneyFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.bkobeszko.b2bcalculator.calculator.summary.CalculationSummary;
-import pl.bkobeszko.b2bcalculator.calculator.summary.MonthlyCalculationSummary;
 import pl.bkobeszko.b2bcalculator.calculator.summary.YearlyCalculationSummary;
-import pl.bkobeszko.b2bcalculator.calculator.summary.statistics.PeriodProfit;
 import pl.bkobeszko.b2bcalculator.calculator.zus.ZUSTaxType;
 import pl.bkobeszko.b2bcalculator.responses.*;
 import pl.bkobeszko.b2bcalculator.responses.statistics.CalculationStatisticsSimplified;
 import pl.bkobeszko.b2bcalculator.responses.statistics.PeriodProfitSimplified;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -38,13 +32,13 @@ public class CalculatorController {
     @Getter
     private B2BCalculatorComponent b2BCalculatorComponent;
     
-    @RequestMapping(value = "/calculate", method = RequestMethod.POST)
+    @PostMapping("/calculate")
     public YearlyCalculationSummarySimplified calculate(
             Locale locale,
             @RequestParam(value = "monthlyNetIncome") String monthlyNetIncome,
             @RequestParam(value = "monthlyCosts") String monthlyCosts,
             @RequestParam(value = "year") String year,
-            @RequestParam(value = "payZUSHealthInsurance") String payZUSHealthInsurance,
+            @RequestParam(value = "payZUSDiseaseInsurance") String payZUSDiseaseInsurance,
             @RequestParam(value = "payVAT") String payVAT,
             @RequestParam(value = "taxType") String taxType,
             @RequestParam(value = "zusTaxType") String zusTaxType) {
@@ -55,7 +49,7 @@ public class CalculatorController {
                 .monthlyNetIncome(Double.parseDouble(monthlyNetIncome))
                 .monthlyCosts(StringUtils.isEmpty(monthlyCosts) ? 0d : Double.parseDouble(monthlyCosts))
                 .year(Integer.parseInt(year))
-                .payZUSHealthInsurance(Boolean.parseBoolean(payZUSHealthInsurance))
+                .payZUSDiseaseInsurance(Boolean.parseBoolean(payZUSDiseaseInsurance))
                 .payVAT(Boolean.parseBoolean(payVAT))
                 .taxType(TaxType.parseEnum(taxType, TaxType.LINEAR))
                 .zusTaxType(ZUSTaxType.parseEnum(zusTaxType, ZUSTaxType.NORMAL))

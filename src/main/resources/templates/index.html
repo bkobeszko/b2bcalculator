@@ -107,8 +107,8 @@
                         <div class="three wide field"></div>
                         <div class="seven wide field">
                             <div class="ui checkbox">
-                                <input id="payZUSHealthInsurance" class="hidden" type="checkbox" checked="checked" />
-                                <label th:text="#{form.payZUSHealthInsurance}">chcę płacić ubezpieczenie zdrowotne</label>
+                                <input id="payZUSDiseaseInsurance" class="hidden" type="checkbox" checked="checked" />
+                                <label th:text="#{form.payZUSDiseaseInsurance}">chcę płacić ubezpieczenie chorobowe</label>
                             </div>
                         </div>
                         <div class="five wide field">
@@ -301,10 +301,10 @@
     ];
 
     var importantInfosArray = [
-        ["header.ZUSCouldBeProportional", [[#{result.importantInfos.header.ZUSCouldBeProportional}]]],
-        ["header.VATIsRequired", [[#{result.importantInfos.header.VATIsRequired}]]],
-        ["message.ZUSCouldBeProportional", [[#{result.importantInfos.message.ZUSCouldBeProportional}]]],
-        ["message.VATIsRequired", [[#{result.importantInfos.message.VATIsRequired}]]]
+        ["header.ZUS_COULD_BE_PROPORTIONAL", [[#{result.importantInfos.header.ZUS_COULD_BE_PROPORTIONAL}]]],
+        ["header.VAT_IS_REQUIRED", [[#{result.importantInfos.header.VAT_IS_REQUIRED}]]],
+        ["message.ZUS_COULD_BE_PROPORTIONAL", [[#{result.importantInfos.message.ZUS_COULD_BE_PROPORTIONAL}]]],
+        ["message.VAT_IS_REQUIRED", [[#{result.importantInfos.message.VAT_IS_REQUIRED}]]]
     ];
     ImportantInfos = new Map(importantInfosArray);
 </script>

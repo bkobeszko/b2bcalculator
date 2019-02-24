@@ -31,12 +31,12 @@ public class ProportionalZUSInfoCalculator implements ImportantInfoCalculator {
     public Optional<ImportantInfo> calculate(CalculatorInputData inputData, TaxFactors taxFactors, MonthlyCalculationSummary lastMonthSummary) {
         ImportantInfo importantInfo = null;
     
-        if (taxFactors.getZusTaxRule() == ZUSTaxRule.ConstantOrProportional) {
+        if (taxFactors.getZusTaxRule() == ZUSTaxRule.CONSTANT_OR_PROPORTIONAL) {
             Money yearlyNetIncome = lastMonthSummary.getSummaryCumulative().getNetInvoiceSum();
             boolean inLimit = compareWithLimit(yearlyNetIncome, taxFactors.getMinimumSalary());
             
             if (inLimit) {
-                importantInfo = calculateProportionalZUSInImportantInfo(inputData.getYear(), yearlyNetIncome, taxFactors, inputData.isPayZUSHealthInsurance());
+                importantInfo = calculateProportionalZUSInImportantInfo(inputData.getYear(), yearlyNetIncome, taxFactors, inputData.isPayZUSDiseaseInsurance());
             }
         }
     
@@ -73,7 +73,7 @@ public class ProportionalZUSInfoCalculator implements ImportantInfoCalculator {
         }
     
         return ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(calculatedTotalZUS)
                 .build();
     }

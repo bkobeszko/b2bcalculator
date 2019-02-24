@@ -155,18 +155,19 @@ public class StatisticsTest extends B2BCalculatorComponentBaseTest {
     }
     
     @Test
-    public void testStatisticsWithoutHealthInsurance() {
+    public void testStatisticsWithoutDiseaseInsuranceNormalZUS() {
         CalculationStatistics expected = CalculationStatistics.builder()
-                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(8848.72))
+                .averageMonthlyProfit(CalculatorUtils.getMoneyOf(8858.11))
                 .uniqueMonthlyProfits(Arrays.asList(
-                        new PeriodProfit(CalculatorUtils.getMoneyOf(8848.72), 1, 12)))
+                        new PeriodProfit(CalculatorUtils.getMoneyOf(8858.11), 1, 12)))
                 .build();
         
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
+                .zusTaxType(ZUSTaxType.NORMAL)
                 .taxType(TaxType.LINEAR)
-                .payZUSHealthInsurance(false)
+                .payZUSDiseaseInsurance(false)
                 .year(2017)
                 .build();
         

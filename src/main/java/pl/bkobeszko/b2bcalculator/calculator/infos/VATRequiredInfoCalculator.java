@@ -44,7 +44,7 @@ public class VATRequiredInfoCalculator implements ImportantInfoCalculator {
         
         if (turnover.isGreaterThan(vatLimit)) {
             importantInfo = ImportantInfo.builder()
-                    .type(ImportantInfo.Type.VATIsRequired)
+                    .type(ImportantInfo.Type.VAT_IS_REQUIRED)
                     .value(turnover)
                     .build();
         }

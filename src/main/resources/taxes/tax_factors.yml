@@ -173,8 +173,8 @@ avgMonthlySalaryWithGainLastQt:
 # no data before
 
 ZUSTaxRule:
-  2019: ConstantOrProportional
-  1990: Constant
+  2019: CONSTANT_OR_PROPORTIONAL
+  1990: CONSTANT
 
 # "% prognozowanego przeciętnego miesięcznego wynagrodzenia brutto"
 socialBasisFactorNormalZUS:

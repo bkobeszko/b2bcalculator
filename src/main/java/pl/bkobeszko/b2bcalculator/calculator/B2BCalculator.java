@@ -75,7 +75,7 @@ public abstract class B2BCalculator {
     }
     
     private List<MonthlyCalculationSummary> calculateMonthSummaries(CalculatorInputData inputData, TaxFactors taxFactors) {
-        ZUSTax zus = inputData.getZusTaxType() == ZUSTaxType.NORMAL ? ZUSTaxFactory.getNormalZUS(taxFactors, inputData.isPayZUSHealthInsurance()) : ZUSTaxFactory.getPreferentialZUS(taxFactors, inputData.isPayZUSHealthInsurance());
+        ZUSTax zus = inputData.getZusTaxType() == ZUSTaxType.NORMAL ? ZUSTaxFactory.getNormalZUS(taxFactors, inputData.isPayZUSDiseaseInsurance()) : ZUSTaxFactory.getPreferentialZUS(taxFactors, inputData.isPayZUSDiseaseInsurance());
         CalculationSummary summaryCumulativeTotal = CalculationSummary.builder().build();
         List<MonthlyCalculationSummary> summariesMonth = new ArrayList<>();
         

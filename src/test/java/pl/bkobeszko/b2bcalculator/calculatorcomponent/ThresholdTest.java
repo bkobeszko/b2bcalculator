@@ -66,7 +66,7 @@ public class ThresholdTest extends B2BCalculatorComponentBaseTest {
                 .monthlyNetIncome(10000)
                 .monthlyCosts(0)
                 .taxType(TaxType.LINEAR)
-                .payZUSHealthInsurance(false)
+                .payZUSDiseaseInsurance(false)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
                 .year(2017)
                 .build();

@@ -19,7 +19,7 @@ public class CalculatorInputData {
     private int year = 2017;
     
     @Builder.Default
-    private boolean payZUSHealthInsurance = true;
+    private boolean payZUSDiseaseInsurance = true;
     
     @Builder.Default
     private boolean payVAT = true;

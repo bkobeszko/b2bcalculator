@@ -31,6 +31,7 @@ public class ZUSTest extends B2BCalculatorComponentBaseTest {
                 .monthlyNetIncome(12000)
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
+                .payZUSDiseaseInsurance(true)
                 .year(2017)
                 .build();
         
@@ -55,6 +56,53 @@ public class ZUSTest extends B2BCalculatorComponentBaseTest {
                 .monthlyCosts(200)
                 .taxType(TaxType.LINEAR)
                 .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .payZUSDiseaseInsurance(true)
+                .year(2017)
+                .build();
+        
+        ZUSTax actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(0).getSummary().getZus();
+        
+        assertThat(actual).isEqualTo(expected);
+    }
+    
+    @Test
+    public void testZUSNormalTaxWithoutDiseaseInsurance() {
+        ZUSTax expected = ZUSTax.builder()
+                .socialInsurance(CalculatorUtils.getMoneyOf(749.94))
+                .healthInsurance(CalculatorUtils.getMoneyOf(297.28))
+                .healthInsuranceContributionToDeduct(CalculatorUtils.getMoneyOf(255.99))
+                .workFund(CalculatorUtils.getMoneyOf(62.67))
+                .total(CalculatorUtils.getMoneyOf(1109.89))
+                .contributionToDeductFromIncome(CalculatorUtils.getMoneyOf(812.61))
+                .build();
+    
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(12000)
+                .zusTaxType(ZUSTaxType.NORMAL)
+                .payZUSDiseaseInsurance(false)
+                .year(2017)
+                .build();
+    
+        ZUSTax actual = b2bCalculatorComponent.calculate(inputData).getMonthlySummaries().get(0).getSummary().getZus();
+    
+        assertThat(actual).isEqualTo(expected);
+    }
+    
+    @Test
+    public void testZUSPreferentialTaxWithoutDiseaseInsurance() {
+        ZUSTax expected = ZUSTax.builder()
+                .socialInsurance(CalculatorUtils.getMoneyOf(175.92))
+                .healthInsurance(CalculatorUtils.getMoneyOf(297.28))
+                .healthInsuranceContributionToDeduct(CalculatorUtils.getMoneyOf(255.99))
+                .workFund(CalculatorUtils.getZeroMoney())
+                .total(CalculatorUtils.getMoneyOf(473.2))
+                .contributionToDeductFromIncome(CalculatorUtils.getMoneyOf(175.92))
+                .build();
+        
+        CalculatorInputData inputData = CalculatorInputData.builder()
+                .monthlyNetIncome(12000)
+                .zusTaxType(ZUSTaxType.PREFERENTIAL)
+                .payZUSDiseaseInsurance(false)
                 .year(2017)
                 .build();
         

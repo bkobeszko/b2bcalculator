@@ -76,7 +76,7 @@ var Form = function(guiManager) {
             taxType: guiManager.getRadioValue("#taxType"),
             monthlyCosts: $("#monthlyNetCosts").val(),
             year: $("#year").val(),
-            payZUSHealthInsurance: $("#payZUSHealthInsurance").prop("checked"),
+            payZUSDiseaseInsurance: $("#payZUSDiseaseInsurance").prop("checked"),
             payVAT: $("#payVAT").prop("checked")
             })
             .done(afterCalculationResponse)

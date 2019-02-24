@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.VATIsRequired;
+import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.VAT_IS_REQUIRED;
 
 /**
  * Copyright (c) 2019, GNU AGPL v. 3.0
@@ -21,7 +21,7 @@ import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.V
  */
 public class VATTest extends B2BCalculatorComponentBaseTest {
     
-    private ImportantInfoFinder importantInfoFinder = new ImportantInfoFinder(VATIsRequired);
+    private ImportantInfoFinder importantInfoFinder = new ImportantInfoFinder(VAT_IS_REQUIRED);
     
     @Test
     public void testWithPayingTheVAT() {
@@ -73,7 +73,7 @@ public class VATTest extends B2BCalculatorComponentBaseTest {
     @Test
     public void testNotPayVATButRequired() {
         ImportantInfo expected = ImportantInfo.builder()
-                .type(VATIsRequired)
+                .type(VAT_IS_REQUIRED)
                 .value(CalculatorUtils.getMoneyOf(200052))
                 .build();
         

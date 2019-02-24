@@ -11,7 +11,7 @@ import pl.bkobeszko.b2bcalculator.utils.ImportantInfoFinder;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.ZUSCouldBeProportional;
+import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL;
 
 /**
  * Copyright (c) 2019, GNU AGPL v. 3.0
@@ -20,12 +20,12 @@ import static pl.bkobeszko.b2bcalculator.calculator.summary.ImportantInfo.Type.Z
  */
 public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
     
-    private ImportantInfoFinder importantInfoFinder = new ImportantInfoFinder(ZUSCouldBeProportional);
+    private ImportantInfoFinder importantInfoFinder = new ImportantInfoFinder(ZUS_COULD_BE_PROPORTIONAL);
     
     @Test
     public void testZUSProportional() {
         ImportantInfo importantInfosExpected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(CalculatorUtils.getMoneyOf(642.59))
                 .build();
         
@@ -55,7 +55,7 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
     @Test
     public void testZUSProportionalExactlyAtLimit() {
         ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(CalculatorUtils.getMoneyOf(1160.57))
                 .build();
         
@@ -116,7 +116,7 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
         // calculated proportional ZUS is 1282.23, but is higher than normal ZUS in this test case
         
         ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(CalculatorUtils.getMoneyOf(644.83))
                 .build();
         
@@ -136,7 +136,7 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
         // calculated proportional is 452.68, but could not be lower than preferential
         
         ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(CalculatorUtils.getMoneyOf(487.90))
                 .build();
         
@@ -156,7 +156,7 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
         // at leap year the ZUS basis is little lower than usual
         
         ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUSCouldBeProportional)
+                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
                 .value(CalculatorUtils.getMoneyOf(644.83))
                 .build();
         

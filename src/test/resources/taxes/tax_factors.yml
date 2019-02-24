@@ -42,8 +42,8 @@ avgMonthlySalaryWithGainLastQt:
   2017: 4404.17
 
 ZUSTaxRule:
-  2017: ConstantOrProportional
-  2010: Constant
+  2017: CONSTANT_OR_PROPORTIONAL
+  2010: CONSTANT
 
 socialBasisFactorNormalZUS:
   2019: 0.2

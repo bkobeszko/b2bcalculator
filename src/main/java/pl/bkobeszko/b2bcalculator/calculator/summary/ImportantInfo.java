@@ -13,7 +13,7 @@ import org.joda.money.Money;
 @Builder
 public class ImportantInfo {
     public enum Type {
-        ZUSCouldBeProportional, VATIsRequired
+        ZUS_COULD_BE_PROPORTIONAL, VAT_IS_REQUIRED
     }
     
     private Type type;
