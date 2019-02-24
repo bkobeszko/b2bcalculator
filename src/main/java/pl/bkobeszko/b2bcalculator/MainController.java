@@ -1,6 +1,5 @@
 package pl.bkobeszko.b2bcalculator;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.bkobeszko.b2bcalculator.taxinformation.TaxFactorsStoreFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,18 +38,7 @@ public class MainController {
     
     @ModelAttribute("years")
     public List<Integer> years() {
-        Integer actualYear = DateTime.now().getYear();
-        List<Integer> yearsSortedDescending = taxFactorsStoreFactory.getTaxFactorsStore().getYearsSortedDescending();
-        
-        List<Integer> years = new ArrayList<>();
-        
-        if (!yearsSortedDescending.contains(actualYear)) {
-            years.add(actualYear);
-        }
-        
-        years.addAll(yearsSortedDescending);
-        
-        return years;
+        return taxFactorsStoreFactory.getTaxFactorsStore().getYearsSortedDescending();
     }
     
     @RequestMapping({ "/", "/index" })
