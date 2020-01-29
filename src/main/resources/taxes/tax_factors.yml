@@ -35,6 +35,8 @@ linearIncomeTaxRate:
 # no linear tax before
 
 scaleIncomeTaxRate1:
+  2020: 0.17
+  2019: 0.1775
   2009: 0.18
   1998: 0.19
   1997: 0.20
@@ -82,6 +84,7 @@ taxFreeAmount:
 # "Minimalne wynagrodzenie"
 # some values are the average from months
 minimumSalary:
+  2020: 2600
   2019: 2250
   2018: 2100
   2017: 2000
@@ -115,6 +118,7 @@ minimumSalary:
 # "Prognozowane przeciętne miesięczne wynagrodzenie brutto"
 # to 2007 it is "real" salary, not estimated
 estimatedAvgMonthlySalary:
+  2020: 5227
   2019: 4765
   2018: 4443
   2017: 4263
@@ -149,6 +153,7 @@ estimatedAvgMonthlySalary:
 # "Przeciętne miesięczne wynagrodzenie w sektorze przedsiębiorstw, włącznie z wypłatami z zysku, w czwartym kwartale roku poprzedniego"
 # some values are the weighted average from months
 avgMonthlySalaryWithGainLastQt:
+  2020: 5368.01
   2019: 5071.41
   2018: 4739.91
   2017: 4404.17

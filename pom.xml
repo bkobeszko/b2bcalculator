@@ -5,7 +5,7 @@
 
     <groupId>pl.bkobeszko</groupId>
     <artifactId>b2bcalculator</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>B2BCalculator</name>
@@ -14,16 +14,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
+        <version>2.2.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
-        <taxUpdateDate>2019-01-19</taxUpdateDate>
+        <taxUpdateDate>2020-01-29</taxUpdateDate>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <springBoot.version>2.1.0.RELEASE</springBoot.version>
+        <springBoot.version>2.2.4.RELEASE</springBoot.version>
         <project.src.resourcesDirectory>src/main/resources</project.src.resourcesDirectory>
         <project.src.frontendDirectory>src/main/frontend</project.src.frontendDirectory>
         <jsMinifiedName>script.min.js</jsMinifiedName>
@@ -75,12 +75,12 @@
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.0</version>
+            <version>2.22.2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
+            <version>1.18.10</version>
         </dependency>
         <dependency>
             <groupId>org.joda</groupId>
@@ -90,17 +90,17 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.0-jre</version>
+            <version>28.2-jre</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>2.9.7</version>
+            <version>2.10.2</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.10.1</version>
+            <version>2.10.5</version>
         </dependency>
 
         <!-- tests -->
@@ -113,13 +113,13 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.3</version>
+            <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.11.1</version>
+            <version>3.15.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -181,7 +181,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.6</version>
+                <version>1.8.0</version>
 
                 <configuration>
                     <workingDirectory>${project.src.frontendDirectory}</workingDirectory>
@@ -195,7 +195,7 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v10.13.0</nodeVersion>
+                            <nodeVersion>v12.14.1</nodeVersion>
                         </configuration>
                     </execution>
 
@@ -215,7 +215,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install gulp@3.9.1</arguments>
+                            <arguments>install gulp@4.0.2</arguments>
                         </configuration>
                     </execution>
 
