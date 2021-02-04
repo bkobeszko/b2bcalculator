@@ -40,6 +40,7 @@ public class SummaryTest extends B2BCalculatorComponentBaseTest {
                 .vat(CalculatorUtils.getMoneyOf(2760))
                 .totalInvoiceSum(CalculatorUtils.getMoneyOf(14760))
                 .scaleTaxThresholdReached(false)
+                .revenue(CalculatorUtils.getMoneyOf(11800))
                 .zus(zusTax)
                 .build();
         
@@ -75,6 +76,7 @@ public class SummaryTest extends B2BCalculatorComponentBaseTest {
                 .vat(CalculatorUtils.getMoneyOf(2760))
                 .totalInvoiceSum(CalculatorUtils.getMoneyOf(14760))
                 .scaleTaxThresholdReached(true)
+                .revenue(CalculatorUtils.getMoneyOf(11800))
                 .zus(zusTax)
                 .build();
         
@@ -110,6 +112,7 @@ public class SummaryTest extends B2BCalculatorComponentBaseTest {
                 .vat(CalculatorUtils.getMoneyOf(2760))
                 .totalInvoiceSum(CalculatorUtils.getMoneyOf(14760))
                 .scaleTaxThresholdReached(true)
+                .revenue(CalculatorUtils.getMoneyOf(11800))
                 .zus(zusTax)
                 .build();
         
@@ -148,6 +151,7 @@ public class SummaryTest extends B2BCalculatorComponentBaseTest {
                 .vat(CalculatorUtils.getMoneyOf(2760))
                 .totalInvoiceSum(CalculatorUtils.getMoneyOf(14760))
                 .scaleTaxThresholdReached(false)
+                .revenue(CalculatorUtils.getMoneyOf(11800))
                 .zus(zusTax)
                 .build();
         

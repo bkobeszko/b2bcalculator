@@ -27,6 +27,7 @@ public class TaxFactors {
     private ZUSTaxRule zusTaxRule;
     private double socialBasisFactorNormalZUS;
     private double socialBasisFactorPreferentialZUS;
+    private double proportionalLimitZUS;
     private ZUSTaxFactors normalZUS;
     private ZUSTaxFactors preferentialZUS;
 }

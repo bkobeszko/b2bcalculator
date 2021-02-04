@@ -70,14 +70,14 @@ public class TaxFactorsTest {
     
     @Test
     public void testGetYears() {
-        Set<Integer> expectedYears = Sets.newHashSet(2016, 2019, 2000, 1990, 2017, 2009, 2010, 1995, 2018, 2012, 2013, 2015);
+        Set<Integer> expectedYears = Sets.newHashSet(2016, 2019, 2000, 1990, 2017, 2009, 2010, 1995, 2018, 2012, 2013, 2020, 2015);
         
         assertThat(taxFactorsStore.getYears()).isEqualTo(expectedYears);
     }
     
     @Test
     public void testGetYearsSortedDescending() {
-        List<Integer> expectedYears = Lists.newArrayList(2019, 2018, 2017, 2016, 2015, 2013, 2012, 2010, 2009, 2000, 1995, 1990);
+        List<Integer> expectedYears = Lists.newArrayList(2020, 2019, 2018, 2017, 2016, 2015, 2013, 2012, 2010, 2009, 2000, 1995, 1990);
         
         assertThat(taxFactorsStore.getYearsSortedDescending()).isEqualTo(expectedYears);
     }

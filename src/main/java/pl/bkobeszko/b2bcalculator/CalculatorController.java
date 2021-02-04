@@ -47,7 +47,7 @@ public class CalculatorController {
         
         CalculatorInputData calculatorInputData = CalculatorInputData.builder()
                 .monthlyNetIncome(Double.parseDouble(monthlyNetIncome))
-                .monthlyCosts(StringUtils.isEmpty(monthlyCosts) ? 0d : Double.parseDouble(monthlyCosts))
+                .monthlyCosts(!StringUtils.hasText(monthlyCosts) ? 0d : Double.parseDouble(monthlyCosts))
                 .year(Integer.parseInt(year))
                 .payZUSDiseaseInsurance(Boolean.parseBoolean(payZUSDiseaseInsurance))
                 .payVAT(Boolean.parseBoolean(payVAT))

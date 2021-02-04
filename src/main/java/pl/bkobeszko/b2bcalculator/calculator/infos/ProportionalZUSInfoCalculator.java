@@ -16,15 +16,14 @@ import java.time.Year;
 import java.util.Optional;
 
 /**
- * Copyright (c) 2019, GNU AGPL v. 3.0
+ * Copyright (c) 2021, GNU AGPL v. 3.0
  *
  * @author Bartłomiej Kobeszko
  */
 public class ProportionalZUSInfoCalculator implements ImportantInfoCalculator {
-    
+
     private static final BigDecimal MONTHLY_INCOME_MULTIPLIER = BigDecimal.valueOf(30);
-    private static final int PROPORTIONAL_ZUS_LIMIT_MULTIPLIER = 30;
-    private static final BigDecimal SPECIAL_FACTOR_MULTIPLIER = BigDecimal.valueOf(0.24);
+    private static final BigDecimal SPECIAL_FACTOR_MULTIPLIER = BigDecimal.valueOf(0.5);
     private static final MathContext INTEGER_OPERATIONS_MATH_CONTEXT = MathContext.DECIMAL32;
     
     @Override
@@ -32,56 +31,51 @@ public class ProportionalZUSInfoCalculator implements ImportantInfoCalculator {
         ImportantInfo importantInfo = null;
     
         if (taxFactors.getZusTaxRule() == ZUSTaxRule.CONSTANT_OR_PROPORTIONAL) {
-            Money yearlyNetIncome = lastMonthSummary.getSummaryCumulative().getNetInvoiceSum();
-            boolean inLimit = compareWithLimit(yearlyNetIncome, taxFactors.getMinimumSalary());
+            Money yearlyRevenue = lastMonthSummary.getSummaryCumulative().getRevenue();
+            boolean inLimit = compareWithLimit(yearlyRevenue, taxFactors.getProportionalLimitZUS());
             
             if (inLimit) {
-                importantInfo = calculateProportionalZUSInImportantInfo(inputData.getYear(), yearlyNetIncome, taxFactors, inputData.isPayZUSDiseaseInsurance());
+                importantInfo = calculateProportionalZUSInImportantInfo(inputData.getYear(), yearlyRevenue, taxFactors, inputData.isPayZUSDiseaseInsurance());
             }
         }
     
         return Optional.ofNullable(importantInfo);
     }
     
-    private boolean compareWithLimit(Money yearlyNetIncome, Money minimumSalary) {
-        Money proportionalZUSLimit = CalculatorUtils.multiply(minimumSalary, PROPORTIONAL_ZUS_LIMIT_MULTIPLIER);
-    
-        return yearlyNetIncome.isLessThan(proportionalZUSLimit) || yearlyNetIncome.isEqual(proportionalZUSLimit);
+    private boolean compareWithLimit(Money yearlyRevenue, double proportionalLimitZUSDouble) {
+        Money proportionalLimitZUS = CalculatorUtils.getMoneyOf(proportionalLimitZUSDouble);
+
+        return yearlyRevenue.isLessThan(proportionalLimitZUS) || yearlyRevenue.isEqual(proportionalLimitZUS);
     }
     
-    private ImportantInfo calculateProportionalZUSInImportantInfo(int year, Money yearlyNetIncome, TaxFactors taxFactors, boolean includeHealthInsurance) {
-        Money averageMonthlyIncome = calculateAverageMonthlyIncome(year, yearlyNetIncome);
-        
-        BigDecimal specialFactor = taxFactors
-                .getEstimatedAvgMonthlySalary().getAmount()
-                .divide(taxFactors.getMinimumSalary().getAmount(), INTEGER_OPERATIONS_MATH_CONTEXT)
-                .multiply(SPECIAL_FACTOR_MULTIPLIER, INTEGER_OPERATIONS_MATH_CONTEXT);
-    
-        Money zusBasis = CalculatorUtils.multiply(averageMonthlyIncome, specialFactor);
+    private ImportantInfo calculateProportionalZUSInImportantInfo(int year, Money yearlyRevenue, TaxFactors taxFactors, boolean includeHealthInsurance) {
+        Money averageMonthlyIncome = calculateAverageMonthlyIncome(year, yearlyRevenue);
+        Money zusBasis = CalculatorUtils.multiply(averageMonthlyIncome, SPECIAL_FACTOR_MULTIPLIER);
     
         ZUSTax normalZUS = ZUSTaxFactory.getNormalZUS(taxFactors, includeHealthInsurance);
         ZUSTax preferentialZUS = ZUSTaxFactory.getPreferentialZUS(taxFactors, includeHealthInsurance);
         ZUSTax proportionalZUS = ZUSTaxFactory.getProportionalZUS(taxFactors, zusBasis, includeHealthInsurance);
-    
-        Money calculatedTotalZUS;
+
         if (proportionalZUS.getTotal().isLessThan(preferentialZUS.getTotal())) {
-            calculatedTotalZUS = preferentialZUS.getTotal();
-        } else if (proportionalZUS.getTotal().isGreaterThan(normalZUS.getTotal())) {
-            calculatedTotalZUS = normalZUS.getTotal();
+            return buildInfoForProportional(preferentialZUS.getTotal());
+        } else if (proportionalZUS.getTotal().isLessThan(normalZUS.getTotal())) {
+            return buildInfoForProportional(proportionalZUS.getTotal());
         } else {
-            calculatedTotalZUS = proportionalZUS.getTotal();
+            return null;
         }
-    
+    }
+
+    private ImportantInfo buildInfoForProportional(Money total) {
         return ImportantInfo.builder()
                 .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
-                .value(calculatedTotalZUS)
+                .value(total)
                 .build();
     }
-    
-    private Money calculateAverageMonthlyIncome(int year, Money yearlyNetIncome) {
+
+    private Money calculateAverageMonthlyIncome(int year, Money yearlyRevenue) {
         BigDecimal daysInYear = BigDecimal.valueOf(Year.of(year).length());
     
-        BigDecimal average = yearlyNetIncome.getAmount()
+        BigDecimal average = yearlyRevenue.getAmount()
                 .divide(daysInYear, INTEGER_OPERATIONS_MATH_CONTEXT)
                 .multiply(MONTHLY_INCOME_MULTIPLIER, INTEGER_OPERATIONS_MATH_CONTEXT);
         

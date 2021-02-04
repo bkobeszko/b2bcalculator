@@ -26,7 +26,7 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
     public void testZUSProportional() {
         ImportantInfo importantInfosExpected = ImportantInfo.builder()
                 .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
-                .value(CalculatorUtils.getMoneyOf(642.59))
+                .value(CalculatorUtils.getMoneyOf(634.78))
                 .build();
         
         ZUSTax zusTaxExpectedNormal = ZUSTax.builder()
@@ -48,53 +48,33 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
         Optional<ImportantInfo> importantInfo = importantInfoFinder.find(yearlyCalculationSummary.getImportantInfos());
     
         assertThat(zusTaxActual).isEqualTo(zusTaxExpectedNormal);
-        assertThat(importantInfo.isPresent()).isEqualTo(true);
-        assertThat(importantInfo.get()).isEqualTo(importantInfosExpected);
-    }
-    
-    @Test
-    public void testZUSProportionalExactlyAtLimit() {
-        ImportantInfo expected = ImportantInfo.builder()
-                .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
-                .value(CalculatorUtils.getMoneyOf(1160.57))
-                .build();
-        
-        CalculatorInputData inputData = CalculatorInputData.builder()
-                .monthlyNetIncome(5000) // this is maximum for minimum salary = 2000 (2000*30=5000*12)
-                .year(2017)
-                .build();
-    
-        Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(true);
-        assertThat(importantInfo.get()).isEqualTo(expected);
+        assertThat(importantInfo).isPresent();
+        assertThat(importantInfo).contains(importantInfosExpected);
     }
     
     @Test
     public void testZUSProportionalTooHighIncome() {
         CalculatorInputData inputData = CalculatorInputData.builder()
-                .monthlyNetIncome(5000.01) // one "grosz" higher
-                .year(2017)
+                .monthlyNetIncome(2000)
+                .year(2020)
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(false);
+
+        assertThat(importantInfo).isNotPresent();
     }
     
     @Test
-    public void testZUSProportionalOnlyForIncomeWithoutCosts() {
-        // the "real" income is 4000 (20000-16000), which is in ZUS limit, but only "pure" net income is applicable
-        
+    public void testZUSProportionalOnlyForIncomeWithCosts() {
         CalculatorInputData inputData = CalculatorInputData.builder()
                 .monthlyNetIncome(20000)
-                .monthlyCosts(16000)
-                .year(2017)
+                .monthlyCosts(18000)
+                .year(2020)
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(false);
+
+        assertThat(importantInfo).isNotPresent();
     }
     
     @Test
@@ -107,8 +87,8 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(false);
+
+        assertThat(importantInfo).isNotPresent();
     }
     
     @Test
@@ -126,9 +106,8 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(true);
-        assertThat(importantInfo.get()).isEqualTo(expected);
+
+        assertThat(importantInfo).isNotPresent();
     }
     
     @Test
@@ -146,9 +125,9 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(true);
-        assertThat(importantInfo.get()).isEqualTo(expected);
+
+        assertThat(importantInfo).isPresent();
+        assertThat(importantInfo).contains(expected);
     }
     
     @Test
@@ -157,17 +136,17 @@ public class ZUSProportionalTest extends B2BCalculatorComponentBaseTest {
         
         ImportantInfo expected = ImportantInfo.builder()
                 .type(ImportantInfo.Type.ZUS_COULD_BE_PROPORTIONAL)
-                .value(CalculatorUtils.getMoneyOf(644.83))
+                .value(CalculatorUtils.getMoneyOf(638.47))
                 .build();
         
         CalculatorInputData inputData = CalculatorInputData.builder()
-                .monthlyNetIncome(2000)
+                .monthlyNetIncome(1900)
                 .year(2020)
                 .build();
     
         Optional<ImportantInfo> importantInfo = importantInfoFinder.calculateAndFind(b2bCalculatorComponent, inputData);
-    
-        assertThat(importantInfo.isPresent()).isEqualTo(true);
-        assertThat(importantInfo.get()).isEqualTo(expected);
+
+        assertThat(importantInfo).isPresent();
+        assertThat(importantInfo).contains(expected);
     }
 }

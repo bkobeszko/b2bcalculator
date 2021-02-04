@@ -191,3 +191,7 @@ socialBasisFactorNormalZUS:
 # "% minimalnego wynagrodzenia"
 socialBasisFactorPreferentialZUS:
   1990: 0.3
+
+proportionalLimitZUS:
+  2020: 120000
+  2019: 67500

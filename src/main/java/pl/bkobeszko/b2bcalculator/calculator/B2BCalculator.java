@@ -108,6 +108,7 @@ public abstract class B2BCalculator {
                 .zus(zus)
                 .netInvoiceSum(monthlyNetIncome)
                 .revenueCost(monthlyCosts).incomeToTax(monthlyNetIncome.minus(monthlyCosts).minus(contributionToDeductFromIncome))
+                .revenue(monthlyNetIncome.minus(monthlyCosts))
                 .build();
         
         /* Very important! Tax calculation must be directly after set the:

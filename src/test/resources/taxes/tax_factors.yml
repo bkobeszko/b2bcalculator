@@ -51,3 +51,7 @@ socialBasisFactorNormalZUS:
 
 socialBasisFactorPreferentialZUS:
   2010: 0.3
+
+proportionalLimitZUS:
+  2020: 120000
+  2019: 67500

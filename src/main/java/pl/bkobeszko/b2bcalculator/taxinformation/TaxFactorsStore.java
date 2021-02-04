@@ -1,6 +1,7 @@
 package pl.bkobeszko.b2bcalculator.taxinformation;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.joda.money.Money;
 import pl.bkobeszko.b2bcalculator.ZUSTaxRule;
 import pl.bkobeszko.b2bcalculator.calculator.CalculatorUtils;
@@ -17,6 +18,7 @@ import java.util.Set;
  * @author Bartłomiej Kobeszko
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     
     private Map<Integer, Double> vatRate;
@@ -32,6 +34,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
     private Map<Integer, String> zusTaxRule;
     private Map<Integer, Double> socialBasisFactorNormalZUS;
     private Map<Integer, Double> socialBasisFactorPreferentialZUS;
+    private Map<Integer, Double> proportionalLimitZUS;
     private ZUSTaxFactorsStore normalZUSTaxFactorsStore;
     private ZUSTaxFactorsStore preferentialZUSTaxFactorsStore;
     
@@ -50,6 +53,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
         ZUSTaxRule currentZUSTaxRule = ZUSTaxRule.valueOf(getDataStringByYear(zusTaxRule, year));
         Double currentSocialBasisFactorNormalZUS = getDataDoubleByYear(socialBasisFactorNormalZUS, year);
         Double currentSocialBasisFactorPreferentialZUS = getDataDoubleByYear(socialBasisFactorPreferentialZUS, year);
+        Double currentProportionalLimitZUS = getDataDoubleByYear(proportionalLimitZUS, year);
         ZUSTaxFactors normalZUS = normalZUSTaxFactorsStore.getTaxFactorsForYear(year);
         ZUSTaxFactors preferentialZUS = preferentialZUSTaxFactorsStore.getTaxFactorsForYear(year);
     
@@ -67,6 +71,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
                 .zusTaxRule(currentZUSTaxRule)
                 .socialBasisFactorNormalZUS(currentSocialBasisFactorNormalZUS)
                 .socialBasisFactorPreferentialZUS(currentSocialBasisFactorPreferentialZUS)
+                .proportionalLimitZUS(currentProportionalLimitZUS)
                 .normalZUS(normalZUS)
                 .preferentialZUS(preferentialZUS)
                 .build();
@@ -89,6 +94,7 @@ public class TaxFactorsStore extends YearMapStore<TaxFactors> {
         years.addAll(zusTaxRule.keySet());
         years.addAll(socialBasisFactorNormalZUS.keySet());
         years.addAll(socialBasisFactorPreferentialZUS.keySet());
+        years.addAll(proportionalLimitZUS.keySet());
         years.addAll(normalZUSTaxFactorsStore.getYears());
         years.addAll(preferentialZUSTaxFactorsStore.getYears());
         

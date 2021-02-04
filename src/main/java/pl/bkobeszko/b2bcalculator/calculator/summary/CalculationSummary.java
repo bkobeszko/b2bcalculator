@@ -64,6 +64,12 @@ public class CalculationSummary {
      */
     @Builder.Default
     private Money revenueCost = CalculatorUtils.getZeroMoney();
+
+    /**
+     * Dochód (przychód minus koszty, bez VAT).
+     */
+    @Builder.Default
+    private Money revenue = CalculatorUtils.getZeroMoney();
     
     public CalculationSummary add(CalculationSummary summary) {
         CalculationSummary added = CalculationSummary.builder().build();
@@ -78,6 +84,7 @@ public class CalculationSummary {
         added.setProfit(summary.getProfit().plus(getProfit()));
         added.setNetInvoiceSum(summary.getNetInvoiceSum().plus(getNetInvoiceSum()));
         added.setRevenueCost(summary.getRevenueCost().plus(getRevenueCost()));
+        added.setRevenue(summary.getRevenue().plus(getRevenue()));
         
         return added;
     }
