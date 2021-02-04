@@ -41,7 +41,7 @@ gulp semantic_ui_watch
 ### Running
 ```sh
 cd target
-java -jar b2bcalculator-1.1.2.jar
+java -jar b2bcalculator-1.2.0.jar
 ```
 Then open in web browser:
 ```sh

@@ -84,6 +84,7 @@ taxFreeAmount:
 # "Minimalne wynagrodzenie"
 # some values are the average from months
 minimumSalary:
+  2021: 2800
   2020: 2600
   2019: 2250
   2018: 2100
@@ -118,6 +119,7 @@ minimumSalary:
 # "Prognozowane przeciętne miesięczne wynagrodzenie brutto"
 # to 2007 it is "real" salary, not estimated
 estimatedAvgMonthlySalary:
+  2021: 5259
   2020: 5227
   2019: 4765
   2018: 4443
@@ -153,6 +155,7 @@ estimatedAvgMonthlySalary:
 # "Przeciętne miesięczne wynagrodzenie w sektorze przedsiębiorstw, włącznie z wypłatami z zysku, w czwartym kwartale roku poprzedniego"
 # some values are the weighted average from months
 avgMonthlySalaryWithGainLastQt:
+  2021: 5656.51
   2020: 5368.01
   2019: 5071.41
   2018: 4739.91
