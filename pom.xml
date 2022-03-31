@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <springBoot.version>2.4.2</springBoot.version>
+        <springBoot.version>2.5.12</springBoot.version>
         <project.src.resourcesDirectory>src/main/resources</project.src.resourcesDirectory>
         <project.src.frontendDirectory>src/main/frontend</project.src.frontendDirectory>
         <jsMinifiedName>script.min.js</jsMinifiedName>
